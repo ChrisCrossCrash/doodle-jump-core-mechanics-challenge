@@ -1,0 +1,18 @@
+{
+  "[gdscript]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false
+  },
+  "files.exclude": {
+    "**/*.uid": true,
+    "**/*.tmp": true,
+  },
+  "search.exclude": {
+    "**/*.uid": true,
+    "addons/**": true,
+    "**/*.tmp": true,
+    "**/*.import": true
+  }
+}
