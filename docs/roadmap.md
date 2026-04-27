@@ -3,8 +3,8 @@
 ## M1 — Skeleton (Days 3–4)
 *Goal: A playable Doodle Jump clone with placeholder shapes. No cards yet, no art, no audio.*
 
-- [ ] Project setup in Godot, version control initialized
-- [ ] Define internal render resolution and pixel-snap rendering settings
+- [x] Project setup in Godot, version control initialized
+- [x] Set up window settings
 - [ ] Kamil placeholder (rectangle) with auto-jump and gravity
 - [ ] Left/right player input (keyboard/controller)
 - [ ] Begin game player input (keyboard, controller)
