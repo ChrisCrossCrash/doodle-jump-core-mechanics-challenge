@@ -19,6 +19,7 @@ If Kamil misses a platform and falls off the bottom of the screen, he splashes i
 ## Mechanics
 - **Jumping and moving**: Kamil automatically jumps upward, and the player can move him left and right to land on platforms.
 - **Card collection**: When Kamil lands on a platform with a card, he collects that card and adds it to his hand.
+- **Pause**: The player can pause at any time during a run. The pause menu covers the screen with an opaque background — the game world is not visible while paused, so the player cannot freeze the action to study the layout for an advantage. Options: Resume (continue the run) and Quit (exit the game).
 
 ## Aesthetic Direction
 - **Visual:** Modern pixel art. Think Terraria or Stardew Valley. The level design is a mountain waterfall with stone ledges sticking out as the platforms.
@@ -30,6 +31,7 @@ If Kamil misses a platform and falls off the bottom of the screen, he splashes i
 - Randomly spawning platforms, some with cards attached to them. Platforms get more sparse the higher you go. Some platforms are one time use (they break after being touched)
 - UI: Height reached, hand of cards, popups when a card combo is achieved
 - Menu screen — doubles as the title screen on first load and the game over screen after each fall; game over variant shows height reached and best hand from the run
+- Pause menu — opaque overlay with resume and quit options
 
 ## Out of Scope
 - Settings menu (stretch goal: music on/off toggle)

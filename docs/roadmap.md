@@ -9,6 +9,7 @@
 - [ ] Menu screen (placeholder text) — title mode on initial load, game over mode after each fall; any input starts a run
 - [ ] Kamil placeholder (rectangle) with auto-jump and gravity
 - [ ] Left/right player input (keyboard/controller)
+- [ ] Pause input — freezes gameplay, placeholder pause menu with resume and quit options
 - [ ] Camera follows Kamil upward only (never scrolls down)
 - [ ] Platform placeholder, basic collision (land only on top)
 - [ ] Random platform spawning above the camera
@@ -77,6 +78,7 @@
 - [ ] Menu screen — unified layout for both title and game over; title variant (logo + Kamil illustration), game over variant (height reached + best hand); polished final layout
 - [ ] Game over transition — HUD fades out, splash plays at bottom of screen, camera pans smoothly down to the starting ledge, menu screen fades in
 - [ ] New run transition — menu screen fades out, Kamil turns and begins jumping
+- [ ] Pause menu — polished layout with opaque background
 - [ ] High score persistence (saved between runs)
 - [ ] Hand-flash effect when a combo lands
 - [ ] Combo popup ("Two Pair! +3 m") above Kamil's head
