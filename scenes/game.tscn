@@ -8,14 +8,7 @@
 [ext_resource type="Script" uid="uid://biqkhmpnbwqb1" path="res://scenes/state_management/gameplay_state.gd" id="6_gee14"]
 [ext_resource type="Script" uid="uid://fka35liuwieb" path="res://scenes/state_management/paused_state.gd" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://cxqwknk1li03s" path="res://scenes/state_management/game_over_state.gd" id="8_vtaks"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
-size = Vector2(260, 20)
-
-[sub_resource type="Gradient" id="Gradient_lnu2h"]
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_lbhrr"]
-gradient = SubResource("Gradient_lnu2h")
+[ext_resource type="PackedScene" uid="uid://dju75b2jg4kyo" path="res://scenes/platform.tscn" id="10_kvpfn"]
 
 [node name="Game" type="Node2D" unique_id=1146921331]
 process_mode = 3
@@ -145,30 +138,13 @@ text = "Game Over!"
 
 [node name="Platforms" type="Node2D" parent="." unique_id=1112372684]
 
-[node name="Platform" type="StaticBody2D" parent="Platforms" unique_id=573929866]
+[node name="Platform" parent="Platforms" unique_id=160376920 instance=ExtResource("10_kvpfn")]
 position = Vector2(518, 1445)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform" unique_id=1683017782]
-shape = SubResource("RectangleShape2D_lnu2h")
-one_way_collision = true
-metadata/_edit_lock_ = true
+[node name="Platform2" parent="Platforms" unique_id=1936368366 instance=ExtResource("10_kvpfn")]
+position = Vector2(718, 1090)
 
-[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform" unique_id=832711603]
-scale = Vector2(1.015625, 20)
-texture = SubResource("GradientTexture1D_lbhrr")
-metadata/_edit_lock_ = true
-
-[node name="Platform2" type="StaticBody2D" parent="Platforms" unique_id=380185850]
-position = Vector2(673, 1071)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform2" unique_id=966031204]
-shape = SubResource("RectangleShape2D_lnu2h")
-one_way_collision = true
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform2" unique_id=1270849371]
-scale = Vector2(1.015625, 20)
-texture = SubResource("GradientTexture1D_lbhrr")
-metadata/_edit_lock_ = true
+[node name="Platform3" parent="Platforms" unique_id=1192776359 instance=ExtResource("10_kvpfn")]
+position = Vector2(321, 719)
 
 [connection signal="bounce" from="Player" to="StateMachine/GameplayState" method="_on_player_bounce"]
