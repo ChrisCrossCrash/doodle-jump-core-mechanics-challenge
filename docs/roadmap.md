@@ -5,18 +5,18 @@
 
 - [x] Project setup in Godot, version control initialized
 - [x] Set up window settings
-- [ ] Kamil starts idle on the starting ledge; auto-jump and player movement disabled until run begins
-- [ ] Menu screen (placeholder text) — title mode on initial load, game over mode after each fall; any input starts a run
-- [ ] Kamil placeholder (rectangle) with auto-jump and gravity
-- [ ] Left/right player input (keyboard/controller)
+- [x] Kamil starts idle on the starting ledge; auto-jump and player movement disabled until run begins
+- [x] Menu screen (placeholder text) — title mode on initial load, game over mode after each fall; any input starts a run
+- [x] Kamil placeholder (rectangle) with auto-jump and gravity
+- [x] Left/right player input (keyboard/controller)
 - [ ] Pause input — freezes gameplay, placeholder pause menu with resume and quit options
-- [ ] Camera follows Kamil upward only (never scrolls down)
-- [ ] Platform placeholder, basic collision (land only on top)
+- [x] Camera follows Kamil upward only (never scrolls down)
+- [x] Platform placeholder, basic collision (land only on top)
 - [ ] Random platform spawning above the camera
 - [ ] Platforms despawn when off-screen below
 - [ ] Fall-off-bottom detection → HUD hides, camera returns to starting ledge, menu screen shows in game over mode
-- [ ] Height tracker (debug text in corner)
-- [ ] Test build export to catch any early issues with the export process
+- [x] Height tracker
+- [x] Test build export to catch any early issues with the export process
 
 **M1 exit:** I can start a run from the menu screen, play for 30 seconds, fall off the bottom, watch the camera return to the starting ledge, see the game over screen, and start a new run. No art, no audio, no cards. Also, the build should work.
 

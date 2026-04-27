@@ -1,0 +1,174 @@
+[gd_scene format=3 uid="uid://crrdqyky4aoct"]
+
+[ext_resource type="Script" uid="uid://ckk7nspuexvo5" path="res://scenes/game.gd" id="1_uwrxv"]
+[ext_resource type="Texture2D" uid="uid://6llkegubyp1o" path="res://assets/uv_grid.png" id="2_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://jnt2td0m8jej" path="res://scenes/player.tscn" id="3_lnu2h"]
+[ext_resource type="Script" uid="uid://b3uwuok8e6fxg" path="res://addons/c3_utils/c3_state_machine.gd" id="4_iywne"]
+[ext_resource type="Script" uid="uid://tt65as0ndvln" path="res://scenes/state_management/title_screen_state.gd" id="5_u5sy4"]
+[ext_resource type="Script" uid="uid://biqkhmpnbwqb1" path="res://scenes/state_management/gameplay_state.gd" id="6_gee14"]
+[ext_resource type="Script" uid="uid://fka35liuwieb" path="res://scenes/state_management/paused_state.gd" id="7_0tnpc"]
+[ext_resource type="Script" uid="uid://cxqwknk1li03s" path="res://scenes/state_management/game_over_state.gd" id="8_vtaks"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
+size = Vector2(260, 20)
+
+[sub_resource type="Gradient" id="Gradient_lnu2h"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lbhrr"]
+gradient = SubResource("Gradient_lnu2h")
+
+[node name="Game" type="Node2D" unique_id=1146921331]
+process_mode = 3
+script = ExtResource("1_uwrxv")
+metadata/_edit_lock_ = true
+
+[node name="Background" type="Parallax2D" parent="." unique_id=712271777]
+repeat_size = Vector2(0, 1920)
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Background" unique_id=1672117413]
+offset_right = 1080.0
+offset_bottom = 1920.0
+texture = ExtResource("2_lbhrr")
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." unique_id=2010971977 instance=ExtResource("3_lnu2h")]
+process_mode = 1
+position = Vector2(496, 1370)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=974198468]
+position = Vector2(540, 960)
+position_smoothing_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="StateMachine" type="Node" parent="." unique_id=249228225 node_paths=PackedStringArray("starting_state")]
+process_mode = 3
+script = ExtResource("4_iywne")
+starting_state = NodePath("TitleScreenState")
+metadata/_custom_type_script = "uid://b3uwuok8e6fxg"
+
+[node name="TitleScreenState" type="Node" parent="StateMachine" unique_id=1559137193]
+script = ExtResource("5_u5sy4")
+metadata/_custom_type_script = "uid://dcnmhrodlegcg"
+
+[node name="GameplayState" type="Node" parent="StateMachine" unique_id=1966279032]
+script = ExtResource("6_gee14")
+metadata/_custom_type_script = "uid://dcnmhrodlegcg"
+
+[node name="PausedState" type="Node" parent="StateMachine" unique_id=1772189652]
+script = ExtResource("7_0tnpc")
+metadata/_custom_type_script = "uid://dcnmhrodlegcg"
+
+[node name="GameOverState" type="Node" parent="StateMachine" unique_id=1957323594]
+script = ExtResource("8_vtaks")
+metadata/_custom_type_script = "uid://dcnmhrodlegcg"
+
+[node name="Overlays" type="Node2D" parent="." unique_id=1345659342]
+metadata/_edit_lock_ = true
+
+[node name="GameplayOverlay" type="CanvasLayer" parent="Overlays" unique_id=1956374334]
+visible = false
+
+[node name="MaxHeightLabel" type="Label" parent="Overlays/GameplayOverlay" unique_id=324505171]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -14.5
+offset_top = -23.0
+offset_right = 14.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = "0 m"
+
+[node name="TitleScreenOverlay" type="CanvasLayer" parent="Overlays" unique_id=2001849394]
+visible = false
+
+[node name="TitleLabel" type="Label" parent="Overlays/TitleScreenOverlay" unique_id=974283512]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -414.5
+offset_right = 414.5
+offset_bottom = 175.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 128
+text = "Kamil's Cards"
+
+[node name="DebugOverlay" type="Node2D" parent="Overlays" unique_id=860890566]
+visible = false
+metadata/_edit_lock_ = true
+
+[node name="CameraTargetLine" type="Line2D" parent="Overlays/DebugOverlay" unique_id=2014039937]
+position = Vector2(0, 1440)
+points = PackedVector2Array(0, 0, 1080, 0)
+default_color = Color(1, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="PausedOverlay" type="CanvasLayer" parent="Overlays" unique_id=1296161128]
+visible = false
+
+[node name="PausedLabel" type="Label" parent="Overlays/PausedOverlay" unique_id=169210855]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -212.0
+offset_top = -44.0
+offset_right = 212.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Game Paused"
+
+[node name="GameOverOverlay" type="CanvasLayer" parent="Overlays" unique_id=210742583]
+visible = false
+
+[node name="GameOverLabel" type="Label" parent="Overlays/GameOverOverlay" unique_id=474900693]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -11.5
+offset_right = 46.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Game Over!"
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1112372684]
+
+[node name="Platform" type="StaticBody2D" parent="Platforms" unique_id=573929866]
+position = Vector2(518, 1445)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform" unique_id=1683017782]
+shape = SubResource("RectangleShape2D_lnu2h")
+one_way_collision = true
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform" unique_id=832711603]
+scale = Vector2(1.015625, 20)
+texture = SubResource("GradientTexture1D_lbhrr")
+metadata/_edit_lock_ = true
+
+[node name="Platform2" type="StaticBody2D" parent="Platforms" unique_id=380185850]
+position = Vector2(673, 1071)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform2" unique_id=966031204]
+shape = SubResource("RectangleShape2D_lnu2h")
+one_way_collision = true
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Platform2" unique_id=1270849371]
+scale = Vector2(1.015625, 20)
+texture = SubResource("GradientTexture1D_lbhrr")
+metadata/_edit_lock_ = true
+
+[connection signal="bounce" from="Player" to="StateMachine/GameplayState" method="_on_player_bounce"]

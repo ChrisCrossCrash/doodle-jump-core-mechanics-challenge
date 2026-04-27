@@ -38,3 +38,7 @@ Here is my entry for the [itch.io Core Mechanics Challenge Jam, Spring 2026](htt
 - Multiplayer
 - Mobile (app) build
 - Leaderboards
+
+## License
+
+Copyright (c) 2026 ChrisCrossCrash (https://github.com/ChrisCrossCrash). All rights reserved.

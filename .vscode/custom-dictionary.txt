@@ -1,14 +1,18 @@
+absf
 autofree
 Buga
 ceili
 clampf
 cooldown
+Crys
 deadzone
 despawn
 elif
+emscripten
 floori
 fmod
 Kamil
+Kenney's
 lerp
 maxf
 minf
@@ -18,3 +22,4 @@ Stardew
 stylebox
 subdirs
 tscn
+zstd
