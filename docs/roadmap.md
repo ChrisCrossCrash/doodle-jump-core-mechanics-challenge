@@ -5,19 +5,19 @@
 
 - [x] Project setup in Godot, version control initialized
 - [x] Set up window settings
+- [ ] Kamil starts idle on the starting ledge; auto-jump and player movement disabled until run begins
+- [ ] Menu screen (placeholder text) — title mode on initial load, game over mode after each fall; any input starts a run
 - [ ] Kamil placeholder (rectangle) with auto-jump and gravity
 - [ ] Left/right player input (keyboard/controller)
-- [ ] Begin game player input (keyboard, controller)
 - [ ] Camera follows Kamil upward only (never scrolls down)
 - [ ] Platform placeholder, basic collision (land only on top)
 - [ ] Random platform spawning above the camera
 - [ ] Platforms despawn when off-screen below
-- [ ] Fall-off-bottom detection → triggers game over state
-- [ ] Minimal game over screen (text only) with "Play Again" that resets state
+- [ ] Fall-off-bottom detection → HUD hides, camera returns to starting ledge, menu screen shows in game over mode
 - [ ] Height tracker (debug text in corner)
 - [ ] Test build export to catch any early issues with the export process
 
-**M1 exit:** I can play a 30-second run, fall off the bottom, click play again, and run again. No art, no audio, no cards. Also, the build should work.
+**M1 exit:** I can start a run from the menu screen, play for 30 seconds, fall off the bottom, watch the camera return to the starting ledge, see the game over screen, and start a new run. No art, no audio, no cards. Also, the build should work.
 
 ## M2 — Card mechanic (Days 4–5)
 *Goal: The novel mechanic works end-to-end. Still placeholder art.*
@@ -74,8 +74,9 @@
 - [ ] Falling SFX (cartoon falling sound)
 - [ ] Splash SFX (when Kamil hits the bottom mist)
 - [ ] Volume mixing — nothing drowns out anything else
-- [ ] Title screen — title, Kamil illustration, fade-up-into-gameplay transition
-- [ ] Game over screen — final layout, score, high score, play again
+- [ ] Menu screen — unified layout for both title and game over; title variant (logo + Kamil illustration), game over variant (height reached + best hand); polished final layout
+- [ ] Game over transition — HUD fades out, splash plays at bottom of screen, camera pans smoothly down to the starting ledge, menu screen fades in
+- [ ] New run transition — menu screen fades out, Kamil turns and begins jumping
 - [ ] High score persistence (saved between runs)
 - [ ] Hand-flash effect when a combo lands
 - [ ] Combo popup ("Two Pair! +3 m") above Kamil's head

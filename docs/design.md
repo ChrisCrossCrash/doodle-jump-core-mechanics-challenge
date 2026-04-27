@@ -12,7 +12,9 @@ Kamil's Cards is a Doodle Jump inspired game where the player is a card-playing 
 3. Each run is a one-off. No grinding or progression between runs.
 
 ## Core Loop
-When the player starts a run, they control Kamil as he jumps up the mountain. Kamil automatically jumps up, and the player can move him left and right to land on platforms. If Kamil misses a platform and falls off the screen, it's game over. Some, but not all of the platforms have cards on them. When Kamil lands on a platform with a card, he collects that card and adds it to his hand. If Kamil's hand forms a valid poker hand, he gets a boost that propels him up the mountain. The better the hand, the bigger the boost! The player tries to climb as high as possible before falling off the screen.
+When the game loads, Kamil stands idle on a ledge at the base of the waterfall. The player presses any button to start — Kamil turns and begins jumping upward. The player moves him left and right to land on platforms. Some, but not all of the platforms have cards on them. When Kamil lands on a platform with a card, he collects that card and adds it to his hand. If Kamil's hand forms a valid poker hand, he gets a boost that propels him up the mountain. The better the hand, the bigger the boost! The player tries to climb as high as possible before falling off the screen.
+
+If Kamil misses a platform and falls off the bottom of the screen, he splashes into the water below. The camera pans back down to the starting ledge, where Kamil stands idle again, and the game over screen fades in showing the player's height reached and best hand of the run. The player presses any button to start a new run.
 
 ## Mechanics
 - **Jumping and moving**: Kamil automatically jumps upward, and the player can move him left and right to land on platforms.
@@ -27,6 +29,7 @@ When the player starts a run, they control Kamil as he jumps up the mountain. Ka
 - Very basic implementation of Doodle Jump as a base to build on.
 - Randomly spawning platforms, some with cards attached to them. Platforms get more sparse the higher you go. Some platforms are one time use (they break after being touched)
 - UI: Height reached, hand of cards, popups when a card combo is achieved
+- Menu screen — doubles as the title screen on first load and the game over screen after each fall; game over variant shows height reached and best hand from the run
 
 ## Out of Scope
 - Settings menu (stretch goal: music on/off toggle)
