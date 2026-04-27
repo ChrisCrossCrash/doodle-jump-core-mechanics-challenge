@@ -12,6 +12,7 @@ extends Node2D
 
 @onready var debug_overlay: Node2D = $Overlays/DebugOverlay
 @onready var camera_target_line: Line2D = $Overlays/DebugOverlay/CameraTargetLine
+@onready var debug_height_marker_scene: PackedScene = preload("res://scenes/debug_height_marker.tscn")
 
 @onready var state_machine: C3StateMachine = $StateMachine
 @onready var title_screen_state: TitleScreenState = $StateMachine/TitleScreenState
@@ -24,6 +25,7 @@ extends Node2D
 
 var camera_target := 0.0
 var _player_position_start: Vector2
+var _debug_height_markers: Dictionary = {} # int y -> Node2D
 
 
 func _ready() -> void:
@@ -56,4 +58,21 @@ func reset_game() -> void:
 
 
 func _update_debug_overlay() -> void:
+    # Draw camera target (red line)
     camera_target_line.position.y = camera_target
+
+    # Draw height markers
+    var gen_stop := snappedi(camera.position.y + 2000.0, 100)
+    var gen_start := snappedi(camera.position.y - 2000.0, 100)
+
+    for y: int in _debug_height_markers.keys():
+        if y < gen_start or y >= gen_stop:
+            _debug_height_markers[y].queue_free()
+            _debug_height_markers.erase(y)
+
+    for y in range(gen_start, gen_stop, 100):
+        if not _debug_height_markers.has(y):
+            var marker: Node2D = debug_height_marker_scene.instantiate()
+            marker.position = Vector2(0, y)
+            debug_overlay.add_child(marker)
+            _debug_height_markers[y] = marker

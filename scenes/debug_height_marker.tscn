@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://by1e5qbrmehpr"]
+
+[ext_resource type="Script" uid="uid://d2mr1mdidp25n" path="res://scenes/debug_height_marker.gd" id="1_ysb3b"]
+
+[node name="DebugHeightMarker" type="Node2D" unique_id=1662633704]
+script = ExtResource("1_ysb3b")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1029675137]
+points = PackedVector2Array(0, 0, 20, 0)
+
+[node name="Label" type="Label" parent="." unique_id=1930561087]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 31.0
+offset_top = -11.5
+offset_right = 71.0
+offset_bottom = 11.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "N/A"
