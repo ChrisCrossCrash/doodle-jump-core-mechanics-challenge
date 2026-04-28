@@ -10,6 +10,10 @@ This file defines conventions and guidelines for this Godot 4 project. Follow th
 
 Use **4 spaces** for indentation. Never use tabs.
 
+### Line Length
+
+Aim for a soft maximum of **80 characters** per line. Exceeding it occasionally is fine — don't contort code to fit — but long lines should be the exception.
+
 ### Type Hints
 
 Always annotate variable declarations and function signatures with type hints. Prefer explicit types over `Variant`.
@@ -26,6 +30,12 @@ var speed = 5.0
 func get_label():
 ```
 
+Use an explicit type annotation when inference would produce a broader type than intended — for example, `instantiate()` returns `Node`, so the specific type must be declared manually:
+
+```gdscript
+var player: CharacterBody2D = player_scene.instantiate()
+```
+
 ### Comments
 
 Comment **sparingly**. Comments should answer *why*, not *what* — the code itself should make the what obvious.
@@ -40,14 +50,12 @@ await get_tree().physics_frame
 speed = 5.0
 ```
 
-Use `##` documentation comments on exported variables, public methods, and class-level declarations. These appear as tooltips in the Godot editor.
+Use `##` documentation comments when it would be useful to surface information as a tooltip in the editor — on a class, an exported variable, or any method where the name and signature alone don't tell the full story. Omit them where the implementation is self-evident.
 
 ```gdscript
 ## The maximum speed the player can reach, in units per second.
 @export var max_speed: float = 10.0
 ```
-
-Do **not** use `##` on private helpers or internal implementation details.
 
 ### Node Ordering Conventions
 
