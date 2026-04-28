@@ -3,11 +3,13 @@ autofree
 Buga
 ceili
 clampf
+COEP
 cooldown
 Crys
 deadzone
 despawn
 elif
+Embedder
 emscripten
 floori
 fmod
@@ -17,9 +19,12 @@ lerp
 maxf
 minf
 onready
+randf
 respawn
+snappedi
 Stardew
 stylebox
 subdirs
 tscn
+tweens
 zstd

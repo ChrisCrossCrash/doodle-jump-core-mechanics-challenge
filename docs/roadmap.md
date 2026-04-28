@@ -12,7 +12,7 @@
 - [ ] Pause input — freezes gameplay, placeholder pause menu with resume and quit options
 - [x] Camera follows Kamil upward only (never scrolls down)
 - [x] Platform placeholder, basic collision (land only on top)
-- [ ] Random platform spawning above the camera
+- [x] Random platform spawning above the camera
 - [ ] Platforms despawn when off-screen below
 - [ ] Fall-off-bottom detection → HUD hides, camera returns to starting ledge, menu screen shows in game over mode
 - [x] Height tracker

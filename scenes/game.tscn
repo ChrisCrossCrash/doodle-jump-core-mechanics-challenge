@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://biqkhmpnbwqb1" path="res://scenes/state_management/gameplay_state.gd" id="6_gee14"]
 [ext_resource type="Script" uid="uid://fka35liuwieb" path="res://scenes/state_management/paused_state.gd" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://cxqwknk1li03s" path="res://scenes/state_management/game_over_state.gd" id="8_vtaks"]
-[ext_resource type="PackedScene" uid="uid://dju75b2jg4kyo" path="res://scenes/platform.tscn" id="10_kvpfn"]
 
 [node name="Game" type="Node2D" unique_id=1146921331]
 process_mode = 3
@@ -138,13 +137,5 @@ text = "Game Over!"
 
 [node name="Platforms" type="Node2D" parent="." unique_id=1112372684]
 
-[node name="Platform" parent="Platforms" unique_id=160376920 instance=ExtResource("10_kvpfn")]
-position = Vector2(518, 1445)
-
-[node name="Platform2" parent="Platforms" unique_id=1936368366 instance=ExtResource("10_kvpfn")]
-position = Vector2(718, 1090)
-
-[node name="Platform3" parent="Platforms" unique_id=1192776359 instance=ExtResource("10_kvpfn")]
-position = Vector2(321, 719)
 
 [connection signal="bounce" from="Player" to="StateMachine/GameplayState" method="_on_player_bounce"]

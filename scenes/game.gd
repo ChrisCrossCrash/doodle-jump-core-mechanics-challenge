@@ -14,6 +14,8 @@ extends Node2D
 @onready var camera_target_line: Line2D = $Overlays/DebugOverlay/CameraTargetLine
 @onready var debug_height_marker_scene: PackedScene = preload("res://scenes/debug_height_marker.tscn")
 
+@onready var platforms: Node2D = $Platforms
+
 @onready var state_machine: C3StateMachine = $StateMachine
 @onready var title_screen_state: TitleScreenState = $StateMachine/TitleScreenState
 @onready var gameplay_state: GameplayState = $StateMachine/GameplayState
@@ -55,6 +57,7 @@ func reset_game() -> void:
     player.position = _player_position_start
     player.velocity = Vector2.ZERO
     camera_target = _player_position_start.y
+    gameplay_state._needs_platform_init = true
 
 
 func _update_debug_overlay() -> void:
