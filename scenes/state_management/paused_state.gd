@@ -1,5 +1,6 @@
 class_name PausedState
 extends BaseGameState
+## State active while the game is paused; returns to gameplay on any key press.
 
 
 func _ready() -> void:

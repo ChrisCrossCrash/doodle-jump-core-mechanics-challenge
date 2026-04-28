@@ -1,5 +1,13 @@
 class_name Game
 extends Node2D
+## Root scene that owns all subsystems and serves as the shared context for the state machine.
+
+## The amount of offset (in pixels) to apply to the camera relative to the player.
+@export var camera_offset := -DisplayServer.window_get_size().y / 4.0
+
+var camera_target := 0.0
+var _player_position_start: Vector2
+var _debug_height_markers: Dictionary = {} # int y -> Node2D
 
 @onready var camera: Camera2D = $Camera2D
 @onready var player: CharacterBody2D = $Player
@@ -10,9 +18,9 @@ extends Node2D
 @onready var paused_overlay: CanvasLayer = $Overlays/PausedOverlay
 @onready var game_over_overlay: CanvasLayer = $Overlays/GameOverOverlay
 
-@onready var debug_overlay: Node2D = $Overlays/DebugOverlay
-@onready var camera_target_line: Line2D = $Overlays/DebugOverlay/CameraTargetLine
-@onready var debug_height_marker_scene: PackedScene = preload("res://scenes/debug_height_marker.tscn")
+@onready var _debug_overlay: Node2D = $Overlays/DebugOverlay
+@onready var _camera_target_line: Line2D = $Overlays/DebugOverlay/CameraTargetLine
+@onready var _debug_height_marker_scene: PackedScene = preload("res://scenes/debug_height_marker.tscn")
 
 @onready var platforms: Node2D = $Platforms
 
@@ -22,13 +30,6 @@ extends Node2D
 @onready var game_over_state: GameOverState = $StateMachine/GameOverState
 @onready var pause_state: PausedState = $StateMachine/PausedState
 
-## The amount of offset (in pixels) to apply to the camera relative to the player.
-@export var camera_offset := -DisplayServer.window_get_size().y / 4.0
-
-var camera_target := 0.0
-var _player_position_start: Vector2
-var _debug_height_markers: Dictionary = {} # int y -> Node2D
-
 
 func _ready() -> void:
     state_machine.init(self)
@@ -36,7 +37,7 @@ func _ready() -> void:
     camera_target = player.position.y
     _player_position_start = player.position
 
-    debug_overlay.visible = OS.is_debug_build()
+    _debug_overlay.visible = OS.is_debug_build()
 
 
 func _physics_process(_delta: float) -> void:
@@ -53,6 +54,7 @@ func _input(event: InputEvent) -> void:
             get_tree().reload_current_scene()
 
 
+## Resets the player and camera to starting positions and flags the platform generator to reinitialize.
 func reset_game() -> void:
     player.position = _player_position_start
     player.velocity = Vector2.ZERO
@@ -62,7 +64,7 @@ func reset_game() -> void:
 
 func _update_debug_overlay() -> void:
     # Draw camera target (red line)
-    camera_target_line.position.y = camera_target
+    _camera_target_line.position.y = camera_target
 
     # Draw height markers
     var gen_stop := snappedi(camera.position.y + 2000.0, 100)
@@ -75,7 +77,7 @@ func _update_debug_overlay() -> void:
 
     for y in range(gen_start, gen_stop, 100):
         if not _debug_height_markers.has(y):
-            var marker: Node2D = debug_height_marker_scene.instantiate()
+            var marker: Node2D = _debug_height_marker_scene.instantiate()
             marker.position = Vector2(0, y)
-            debug_overlay.add_child(marker)
+            _debug_overlay.add_child(marker)
             _debug_height_markers[y] = marker

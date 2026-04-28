@@ -1,5 +1,6 @@
 class_name GameplayState
 extends BaseGameState
+## Active during live gameplay; manages platform generation, camera tracking, and fall detection.
 
 ## How far below the camera center the player must fall to trigger game over (half the viewport height).
 const FALL_DEATH_THRESHOLD := 960.0
@@ -23,14 +24,11 @@ const DESPAWN_MARGIN := 300.0
 ## Must be less than the player's max jump height (~510 px).
 @export var max_gap := 350.0
 
-## The world-space Y of the highest platform generated so far.
-## Used as the cursor for upward generation.
-
+# The world-space Y of the highest platform generated so far; used as the cursor for upward generation.
 var _highest_platform_y := 0.0
 
-## Set to true at game start and after every reset.
-## Cleared after [method _initialize_platforms] runs
-## so that pausing and resuming does not regenerate platforms.
+# Set to true at game start and after every reset; cleared after _initialize_platforms() runs
+# so that pausing and resuming does not regenerate platforms.
 var _needs_platform_init := true
 
 
@@ -64,8 +62,8 @@ func _on_player_bounce(pos: Vector2) -> void:
     _update_platforms()
 
 
-## Clears all existing platforms and seeds a fresh set around the player's starting position.
-## Called every time gameplay begins (including after game-over resets).
+# Clears all existing platforms and seeds a fresh set around the player's starting position.
+# Called every time gameplay begins (including after game-over resets).
 func _initialize_platforms() -> void:
     for child in game.platforms.get_children():
         child.queue_free()
@@ -78,8 +76,8 @@ func _initialize_platforms() -> void:
     _generate_platforms_up_to(camera_top - SPAWN_LOOKAHEAD)
 
 
-## Instantiates platforms at random horizontal positions, stepping upward by random gaps,
-## until [param target_y] is reached or exceeded.
+# Instantiates platforms at random horizontal positions, stepping upward by random gaps,
+# until target_y is reached or exceeded.
 func _generate_platforms_up_to(target_y: float) -> void:
     var viewport_width := game.get_viewport_rect().size.x
     while _highest_platform_y > target_y:
@@ -90,8 +88,8 @@ func _generate_platforms_up_to(target_y: float) -> void:
         game.platforms.add_child(platform)
 
 
-## Spawns new platforms ahead of the camera target and frees platforms that have
-## scrolled off the bottom of the screen. Called on every player bounce.
+# Spawns new platforms ahead of the camera target and frees platforms that have
+# scrolled off the bottom of the screen. Called on every player bounce.
 func _update_platforms() -> void:
     var viewport_half_h := game.get_viewport_rect().size.y * 0.5
     var spawn_camera_top := game.camera_target + game.camera.offset.y - viewport_half_h

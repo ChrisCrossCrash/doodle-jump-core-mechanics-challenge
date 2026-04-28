@@ -1,5 +1,6 @@
 class_name TitleScreenState
 extends BaseGameState
+## Initial state shown on launch; dismisses the title screen and starts gameplay on any key press.
 
 
 func _ready() -> void:

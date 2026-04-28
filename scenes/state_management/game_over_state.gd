@@ -1,5 +1,6 @@
 class_name GameOverState
 extends BaseGameState
+## State shown after the player dies; resets and restarts gameplay on any key press.
 
 
 func _ready() -> void:

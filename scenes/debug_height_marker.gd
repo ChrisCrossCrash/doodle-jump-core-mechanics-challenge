@@ -1,8 +1,9 @@
+class_name DebugHeightMarker
 extends Node2D
+## Debug overlay node that labels a horizontal gridline with its world-space Y coordinate.
 
-
-@onready var label: Label = $Label
+@onready var _label: Label = $Label
 
 
 func _ready() -> void:
-    label.text = str(position.y)
+    _label.text = str(position.y)

@@ -1,5 +1,8 @@
+class_name Player
 extends CharacterBody2D
+## Handles player movement, auto-jumping, and horizontal screen wrapping.
 
+## Emitted when the player lands on a platform, passing the landing position.
 signal bounce(pos: Vector2)
 
 ## The upward velocity applied to the player when they land on a platform.
