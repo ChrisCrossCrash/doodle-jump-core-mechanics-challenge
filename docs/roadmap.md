@@ -10,15 +10,21 @@
 - [x] Kamil placeholder (rectangle) with auto-jump and gravity
 - [x] Left/right player input (keyboard/controller)
 - [ ] Pause input — freezes gameplay, placeholder pause menu with resume and quit options
+  - [ ] Opaque background
+  - [ ] Resume button
+  - [ ] Quit button (exits game)
+  - [ ] Pause menu navigation (keyboard/controller)
 - [x] Camera follows Kamil upward only (never scrolls down)
 - [x] Platform placeholder, basic collision (land only on top)
 - [x] Random platform spawning above the camera
 - [ ] Platforms despawn when off-screen below
-- [ ] Fall-off-bottom detection → HUD hides, camera returns to starting ledge, menu screen shows in game over mode
-- [x] Height tracker
+  - [ ] Fix issue where it's still possible to land on a platform that's just below the camera.
+- [ ] Fall-off-bottom detection → game over screen appears
+- [ ] Game over screen to new run transition: Camera pans back to starting ledge, title screen appears, Kamil resets to idle pose
+- [ ] Height tracker (it appears to be bugged, not updating)
 - [x] Test build export to catch any early issues with the export process
 
-**M1 exit:** I can start a run from the menu screen, play for 30 seconds, fall off the bottom, watch the camera return to the starting ledge, see the game over screen, and start a new run. No art, no audio, no cards. Also, the build should work.
+**M1 exit:** I can start a run from the menu screen, play for 30 seconds, fall off the bottom, see the game over screen, press any input to bring up the title screen again, and start a new game. No art, no audio, no cards. Also, the build should work.
 
 ## M2 — Card mechanic (Days 4–5)
 *Goal: The novel mechanic works end-to-end. Still placeholder art.*
