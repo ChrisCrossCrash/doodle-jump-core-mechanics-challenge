@@ -15,5 +15,5 @@ func exit() -> void:
 func process_input(event: InputEvent) -> C3State:
     if C3Utils.is_any_key(event):
         game.reset_game()
-        return game.gameplay_state
+        return game.title_screen_state
     return null

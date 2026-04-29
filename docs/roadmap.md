@@ -19,7 +19,7 @@
 - [x] Random platform spawning above the camera
 - [x] Platforms despawn when off-screen below
 - [x] Fall-off-bottom detection → game over screen appears
-- [ ] Game over screen to new run transition: Camera pans back to starting ledge, title screen appears, Kamil resets to idle pose
+- [x] Game over screen to new run transition: Camera pans back to starting ledge, title screen appears, Kamil resets to idle pose
 - [ ] Height tracker (it appears to be bugged, not updating)
 - [x] Test build export to catch any early issues with the export process
 
