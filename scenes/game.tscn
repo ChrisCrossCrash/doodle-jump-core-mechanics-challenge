@@ -102,6 +102,14 @@ metadata/_edit_lock_ = true
 [node name="PausedOverlay" type="CanvasLayer" parent="Overlays" unique_id=1296161128]
 visible = false
 
+[node name="ColorRect" type="ColorRect" parent="Overlays/PausedOverlay" unique_id=589679739]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.21950102, 0.21950102, 0.21950102, 1)
+
 [node name="PausedLabel" type="Label" parent="Overlays/PausedOverlay" unique_id=169210855]
 anchors_preset = 8
 anchor_left = 0.5
@@ -109,13 +117,48 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -212.0
-offset_top = -44.0
+offset_top = -174.0
 offset_right = 212.0
-offset_bottom = 44.0
+offset_bottom = -86.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "Game Paused"
+
+[node name="ResumeButton" type="Button" parent="Overlays/PausedOverlay" unique_id=1537219977 groups=["pause_menu_resume_button"]]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -26.5
+offset_right = 66.0
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_right = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+theme_override_font_sizes/font_size = 32
+text = "Resume"
+
+[node name="QuitButton" type="Button" parent="Overlays/PausedOverlay" unique_id=1285669216]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = 54.0
+offset_right = 66.0
+offset_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_left = NodePath("../ResumeButton")
+focus_neighbor_top = NodePath("../ResumeButton")
+theme_override_font_sizes/font_size = 32
+text = "Quit
+"
 
 [node name="GameOverOverlay" type="CanvasLayer" parent="Overlays" unique_id=210742583]
 visible = false
@@ -138,3 +181,5 @@ text = "Game Over!"
 [node name="Platforms" type="Node2D" parent="." unique_id=1112372684]
 
 [connection signal="bounce" from="Player" to="StateMachine/GameplayState" method="_on_player_bounce"]
+[connection signal="pressed" from="Overlays/PausedOverlay/ResumeButton" to="StateMachine/PausedState" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Overlays/PausedOverlay/QuitButton" to="StateMachine/PausedState" method="_on_quit_button_pressed"]

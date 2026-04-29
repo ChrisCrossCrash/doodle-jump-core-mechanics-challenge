@@ -9,11 +9,11 @@
 - [x] Menu screen (placeholder text) — title mode on initial load, game over mode after each fall; any input starts a run
 - [x] Kamil placeholder (rectangle) with auto-jump and gravity
 - [x] Left/right player input (keyboard/controller)
-- [ ] Pause input — freezes gameplay, placeholder pause menu with resume and quit options
-  - [ ] Opaque background
-  - [ ] Resume button
-  - [ ] Quit button (exits game)
-  - [ ] Pause menu navigation (keyboard/controller)
+- [x] Pause input — freezes gameplay, placeholder pause menu with resume and quit options
+  - [x] Opaque background
+  - [x] Functional resume button
+  - [x] Functional quit button (exits game)
+  - [x] Pause menu navigation (keyboard/controller)
 - [x] Camera follows Kamil upward only (never scrolls down)
 - [x] Platform placeholder, basic collision (land only on top)
 - [x] Random platform spawning above the camera

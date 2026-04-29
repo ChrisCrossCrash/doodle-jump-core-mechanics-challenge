@@ -55,8 +55,6 @@ func change_state(new_state: C3State) -> void:
         current_state.exit()
 
     current_state = new_state
-    # FIXME: Invalid call. Nonexistent function 'enter' in base 'Nil'.
-    # This happens when `.enter()` is called from the `init()` method
     current_state.enter(previous_state)
 
 
