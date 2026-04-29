@@ -58,7 +58,7 @@
 - [ ] Card platform sprite
 - [ ] Breakable platform sprite (visually distinct from regular)
 - [ ] Card sprites (52 cards, or a system that composes them from suit + rank parts)
-- [ ] Animated waterfall background
+- [x] Animated waterfall background
 - [ ] Bottom-of-screen mist overlay
 - [ ] Starting platform sprite
 - [ ] Title text/logo

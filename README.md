@@ -39,6 +39,10 @@ Here is my entry for the [itch.io Core Mechanics Challenge Jam, Spring 2026](htt
 - Mobile (app) build
 - Leaderboards
 
+## Credits
+
+- **Color palette:** [CC-29 by Alpha6](https://lospec.com/palette-list/cc-29)
+
 ## License
 
 Copyright (c) 2026 ChrisCrossCrash (https://github.com/ChrisCrossCrash). All rights reserved.

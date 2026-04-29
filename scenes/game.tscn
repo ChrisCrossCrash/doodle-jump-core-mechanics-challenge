@@ -1,13 +1,28 @@
 [gd_scene format=3 uid="uid://crrdqyky4aoct"]
 
 [ext_resource type="Script" uid="uid://ckk7nspuexvo5" path="res://scenes/game.gd" id="1_uwrxv"]
-[ext_resource type="Texture2D" uid="uid://6llkegubyp1o" path="res://assets/uv_grid.png" id="2_lbhrr"]
+[ext_resource type="Shader" uid="uid://c7ql6k68uadus" path="res://scenes/waterfall.gdshader" id="2_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://dyc5nisfq5m4h" path="res://assets/bg_waterfall1.png" id="2_gee14"]
 [ext_resource type="PackedScene" uid="uid://jnt2td0m8jej" path="res://scenes/player.tscn" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://bxxxng37sob3a" path="res://assets/bg_waterfall2.png" id="3_vtaks"]
 [ext_resource type="Script" uid="uid://b3uwuok8e6fxg" path="res://addons/c3_utils/c3_state_machine.gd" id="4_iywne"]
 [ext_resource type="Script" uid="uid://tt65as0ndvln" path="res://scenes/state_management/title_screen_state.gd" id="5_u5sy4"]
 [ext_resource type="Script" uid="uid://biqkhmpnbwqb1" path="res://scenes/state_management/gameplay_state.gd" id="6_gee14"]
 [ext_resource type="Script" uid="uid://fka35liuwieb" path="res://scenes/state_management/paused_state.gd" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://cxqwknk1li03s" path="res://scenes/state_management/game_over_state.gd" id="8_vtaks"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vtaks"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vtaks"]
+width = 135
+height = 240
+noise = SubResource("FastNoiseLite_vtaks")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vtaks"]
+shader = ExtResource("2_0tnpc")
+shader_parameter/frame_two = ExtResource("3_vtaks")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_vtaks")
 
 [node name="Game" type="Node2D" unique_id=1146921331]
 process_mode = 3
@@ -19,14 +34,17 @@ repeat_size = Vector2(0, 1920)
 metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Background" unique_id=1672117413]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_vtaks")
 offset_right = 1080.0
 offset_bottom = 1920.0
-texture = ExtResource("2_lbhrr")
+texture = ExtResource("2_gee14")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." unique_id=2010971977 instance=ExtResource("3_lnu2h")]
 process_mode = 1
 position = Vector2(496, 1370)
+jump_velocity = 1600.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=974198468]
 position = Vector2(540, 960)
