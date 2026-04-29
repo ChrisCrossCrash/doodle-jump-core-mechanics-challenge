@@ -3,10 +3,6 @@ extends BaseGameState
 ## State shown after the player dies; resets and restarts gameplay on any key press.
 
 
-func _ready() -> void:
-    process_mode = Node.PROCESS_MODE_ALWAYS
-
-
 func enter(_from: C3State) -> void:
     get_tree().paused = true
     game.game_over_overlay.show()
