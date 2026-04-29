@@ -20,7 +20,7 @@
 - [x] Platforms despawn when off-screen below
 - [x] Fall-off-bottom detection → game over screen appears
 - [x] Game over screen to new run transition: Camera pans back to starting ledge, title screen appears, Kamil resets to idle pose
-- [ ] Height tracker (it appears to be bugged, not updating)
+- [x] Height tracker
 - [x] Test build export to catch any early issues with the export process
 
 **M1 exit:** I can start a run from the menu screen, play for 30 seconds, fall off the bottom, see the game over screen, press any input to bring up the title screen again, and start a new game. No art, no audio, no cards. Also, the build should work.

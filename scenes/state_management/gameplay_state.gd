@@ -51,6 +51,7 @@ func process_physics(_delta: float) -> C3State:
 
 func _on_player_bounce(pos: Vector2) -> void:
     game.camera.position.y = min(pos.y, game.camera.position.y)
+    _update_max_height_label()
     _update_platforms()
 
 
@@ -99,3 +100,9 @@ func _spawn_platform(pos: Vector2) -> Node2D:
     platform.position = pos
     game.platforms.add_child(platform)
     return platform
+
+
+## Update the label on the bottom of the screen with the player's progress in meters (1 m = 100 px).
+func _update_max_height_label() -> void:
+    var progress = floori(game.y_coord_to_progress(game.camera.position.y) * 0.01)
+    game.max_height_label.text = str(progress) + " m"

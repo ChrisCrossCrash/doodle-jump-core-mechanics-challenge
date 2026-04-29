@@ -59,6 +59,12 @@ func reset_game() -> void:
     camera.position.y = _player_position_start.y
 
 
+## Given a world-space Y coordinate, returns the player's progress
+## in pixels relative to the starting position.
+func y_coord_to_progress(y: float) -> float:
+    return _player_position_start.y - y
+
+
 func _update_debug_overlay() -> void:
     # Draw camera target (red line)
     _camera_target_line.position.y = camera.position.y
