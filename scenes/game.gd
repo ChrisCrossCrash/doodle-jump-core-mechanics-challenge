@@ -54,12 +54,11 @@ func _input(event: InputEvent) -> void:
             get_tree().reload_current_scene()
 
 
-## Resets the player and camera to starting positions and flags the platform generator to reinitialize.
+## Resets the player and camera to starting positions.
 func reset_game() -> void:
     player.position = _player_position_start
     player.velocity = Vector2.ZERO
     camera_target = _player_position_start.y
-    gameplay_state._needs_platform_init = true
 
 
 func _update_debug_overlay() -> void:

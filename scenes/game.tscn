@@ -137,5 +137,4 @@ text = "Game Over!"
 
 [node name="Platforms" type="Node2D" parent="." unique_id=1112372684]
 
-
 [connection signal="bounce" from="Player" to="StateMachine/GameplayState" method="_on_player_bounce"]

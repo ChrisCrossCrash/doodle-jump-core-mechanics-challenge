@@ -7,7 +7,7 @@ func _ready() -> void:
     process_mode = Node.PROCESS_MODE_ALWAYS
 
 
-func enter() -> void:
+func enter(_from: C3State) -> void:
     get_tree().paused = true
     game.paused_overlay.show()
 

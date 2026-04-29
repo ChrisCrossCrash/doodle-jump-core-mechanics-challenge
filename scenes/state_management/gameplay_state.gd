@@ -27,17 +27,11 @@ const DESPAWN_MARGIN := 300.0
 # The world-space Y of the highest platform generated so far; used as the cursor for upward generation.
 var _highest_platform_y := 0.0
 
-# Set to true at game start and after every reset; cleared after _initialize_platforms() runs
-# so that pausing and resuming does not regenerate platforms.
-var _needs_platform_init := true
-
-
-func enter() -> void:
+func enter(from: C3State) -> void:
     get_tree().paused = false
     game.gameplay_overlay.show()
-    if _needs_platform_init:
+    if not from is PausedState:
         _initialize_platforms()
-        _needs_platform_init = false
 
 
 func exit() -> void:
