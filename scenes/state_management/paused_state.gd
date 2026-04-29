@@ -3,11 +3,6 @@ extends BaseGameState
 ## State active while the game is paused; returns to gameplay on any key press.
 
 
-func _ready() -> void:
-    # TODO: See if we can just get rid of this.
-    process_mode = Node.PROCESS_MODE_ALWAYS
-
-
 func enter(_from: C3State) -> void:
     get_tree().paused = true
     game.paused_overlay.show()
