@@ -14,9 +14,6 @@ const PLATFORM_HALF_WIDTH := 130.0
 ## How many pixels above the camera's top edge to pre-generate platforms.
 const SPAWN_LOOKAHEAD := 500.0
 
-## How many pixels below the camera's bottom edge a platform must be before it is freed.
-const DESPAWN_MARGIN := 300.0
-
 ## Minimum vertical distance between consecutive platforms.
 @export var min_gap := 150.0
 
@@ -24,8 +21,9 @@ const DESPAWN_MARGIN := 300.0
 ## Must be less than the player's max jump height (~510 px).
 @export var max_gap := 350.0
 
-# The world-space Y of the highest platform generated so far; used as the cursor for upward generation.
+## The world-space Y of the highest platform generated so far; used as the cursor for upward generation.
 var _highest_platform_y := 0.0
+
 
 func enter(from: C3State) -> void:
     get_tree().paused = false
@@ -52,44 +50,52 @@ func process_physics(_delta: float) -> C3State:
 
 
 func _on_player_bounce(pos: Vector2) -> void:
-    game.camera_target = min(pos.y, game.camera_target)
+    game.camera.position.y = min(pos.y, game.camera.position.y)
     _update_platforms()
 
 
-# Clears all existing platforms and seeds a fresh set around the player's starting position.
-# Called every time gameplay begins (including after game-over resets).
+## Clears all existing platforms and seeds a fresh set around the player's starting position.
+## Called every time gameplay begins (including after game-over resets).
 func _initialize_platforms() -> void:
+    # Clear any existing platforms.
     for child in game.platforms.get_children():
         child.queue_free()
+
+    # Place a starting platform just below the player.
     _highest_platform_y = game.player.position.y + 80.0
-    var start_platform := PLATFORM_SCENE.instantiate() as Node2D
-    start_platform.position = Vector2(game.player.position.x, _highest_platform_y)
-    game.platforms.add_child(start_platform)
+    _spawn_platform(Vector2(game.player.position.x, _highest_platform_y))
+
+    # Generate the initial platforms.
     var viewport_half_h := game.get_viewport_rect().size.y * 0.5
-    var camera_top := game.camera_target + game.camera.offset.y - viewport_half_h
+    # camera_target is the desired camera center; subtracting half the viewport
+    # height gives the top edge in world space.
+    var camera_top := game.camera.position.y + game.camera.offset.y - viewport_half_h
     _generate_platforms_up_to(camera_top - SPAWN_LOOKAHEAD)
 
 
-# Instantiates platforms at random horizontal positions, stepping upward by random gaps,
-# until target_y is reached or exceeded.
+## Instantiates platforms at random horizontal positions, stepping upward by random gaps,
+## until target_y is reached or exceeded.
 func _generate_platforms_up_to(target_y: float) -> void:
     var viewport_width := game.get_viewport_rect().size.x
     while _highest_platform_y > target_y:
         _highest_platform_y -= randf_range(min_gap, max_gap)
         var x := randf_range(PLATFORM_HALF_WIDTH, viewport_width - PLATFORM_HALF_WIDTH)
-        var platform := PLATFORM_SCENE.instantiate() as Node2D
-        platform.position = Vector2(x, _highest_platform_y)
-        game.platforms.add_child(platform)
+        _spawn_platform(Vector2(x, _highest_platform_y))
 
 
-# Spawns new platforms ahead of the camera target and frees platforms that have
-# scrolled off the bottom of the screen. Called on every player bounce.
+## Spawns new platforms ahead of the camera target and frees platforms that have
+## scrolled off the bottom of the screen. Called on every player bounce.
 func _update_platforms() -> void:
     var viewport_half_h := game.get_viewport_rect().size.y * 0.5
-    var spawn_camera_top := game.camera_target + game.camera.offset.y - viewport_half_h
+    var spawn_camera_top := game.camera.position.y + game.camera.offset.y - viewport_half_h
     if _highest_platform_y > spawn_camera_top - SPAWN_LOOKAHEAD:
         _generate_platforms_up_to(spawn_camera_top - SPAWN_LOOKAHEAD)
-    var despawn_threshold := game.camera.position.y + game.camera.offset.y + viewport_half_h + DESPAWN_MARGIN
-    for platform in game.platforms.get_children():
-        if platform.position.y > despawn_threshold:
-            platform.queue_free()
+
+
+## Instantiates a platform at the given world-space position and adds it to the platforms node.
+## Returns the new platform instance, which can be used for further configuration if needed.
+func _spawn_platform(pos: Vector2) -> Node2D:
+    var platform := PLATFORM_SCENE.instantiate() as Platform
+    platform.position = pos
+    game.platforms.add_child(platform)
+    return platform

@@ -17,9 +17,8 @@
 - [x] Camera follows Kamil upward only (never scrolls down)
 - [x] Platform placeholder, basic collision (land only on top)
 - [x] Random platform spawning above the camera
-- [ ] Platforms despawn when off-screen below
-  - [ ] Fix issue where it's still possible to land on a platform that's just below the camera.
-- [ ] Fall-off-bottom detection → game over screen appears
+- [x] Platforms despawn when off-screen below
+- [x] Fall-off-bottom detection → game over screen appears
 - [ ] Game over screen to new run transition: Camera pans back to starting ledge, title screen appears, Kamil resets to idle pose
 - [ ] Height tracker (it appears to be bugged, not updating)
 - [x] Test build export to catch any early issues with the export process
