@@ -6,7 +6,6 @@ extends Node2D
 @export var camera_offset := -DisplayServer.window_get_size().y / 4.0
 
 var _player_position_start: Vector2
-var _debug_height_markers: Dictionary = {} # int y -> Node2D
 
 @onready var camera: Camera2D = $Camera2D
 @onready var player: CharacterBody2D = $Player
@@ -16,10 +15,6 @@ var _debug_height_markers: Dictionary = {} # int y -> Node2D
 @onready var gameplay_overlay: CanvasLayer = $Overlays/GameplayOverlay
 @onready var paused_overlay: CanvasLayer = $Overlays/PausedOverlay
 @onready var game_over_overlay: CanvasLayer = $Overlays/GameOverOverlay
-
-@onready var _debug_overlay: Node2D = $Overlays/DebugOverlay
-@onready var _camera_target_line: Line2D = $Overlays/DebugOverlay/CameraTargetLine
-@onready var _debug_height_marker_scene: PackedScene = preload("res://scenes/debug_height_marker.tscn")
 
 @onready var platforms: Node2D = $Platforms
 
@@ -35,13 +30,6 @@ func _ready() -> void:
     camera.offset.y = camera_offset
     camera.position.y = player.position.y
     _player_position_start = player.position
-
-    _debug_overlay.visible = OS.is_debug_build()
-
-
-func _physics_process(_delta: float) -> void:
-    if OS.is_debug_build():
-        _update_debug_overlay()
 
 
 func _input(event: InputEvent) -> void:
@@ -63,24 +51,3 @@ func reset_game() -> void:
 ## in pixels relative to the starting position.
 func y_coord_to_progress(y: float) -> float:
     return _player_position_start.y - y
-
-
-func _update_debug_overlay() -> void:
-    # Draw camera target (red line)
-    _camera_target_line.position.y = camera.position.y
-
-    # Draw height markers
-    var gen_stop := snappedi(camera.position.y + 2000.0, 100)
-    var gen_start := snappedi(camera.position.y - 2000.0, 100)
-
-    for y: int in _debug_height_markers.keys():
-        if y < gen_start or y >= gen_stop:
-            _debug_height_markers[y].queue_free()
-            _debug_height_markers.erase(y)
-
-    for y in range(gen_start, gen_stop, 100):
-        if not _debug_height_markers.has(y):
-            var marker: Node2D = _debug_height_marker_scene.instantiate()
-            marker.position = Vector2(0, y)
-            _debug_overlay.add_child(marker)
-            _debug_height_markers[y] = marker

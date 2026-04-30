@@ -107,16 +107,6 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 128
 text = "Kamil's Cards"
 
-[node name="DebugOverlay" type="Node2D" parent="Overlays" unique_id=860890566]
-visible = false
-metadata/_edit_lock_ = true
-
-[node name="CameraTargetLine" type="Line2D" parent="Overlays/DebugOverlay" unique_id=2014039937]
-position = Vector2(0, 1440)
-points = PackedVector2Array(0, 0, 1080, 0)
-default_color = Color(1, 0, 0, 1)
-metadata/_edit_lock_ = true
-
 [node name="PausedOverlay" type="CanvasLayer" parent="Overlays" unique_id=1296161128]
 visible = false
 
