@@ -24,12 +24,17 @@ var _player_position_start: Vector2
 @onready var game_over_state: GameOverState = $StateMachine/GameOverState
 @onready var pause_state: PausedState = $StateMachine/PausedState
 
+@onready var quit_button: Button = $Overlays/PausedOverlay/QuitButton
+
 
 func _ready() -> void:
     state_machine.init(self)
     camera.offset.y = camera_offset
     camera.position.y = player.position.y
     _player_position_start = player.position
+
+    # Don't show the quit button on the web build version.
+    quit_button.visible = not OS.has_feature("web")
 
 
 func _input(event: InputEvent) -> void:
