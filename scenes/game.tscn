@@ -120,11 +120,13 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -414.5
+offset_top = 516.0
 offset_right = 414.5
-offset_bottom = 175.0
+offset_bottom = 839.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 128
-text = "Kamil's Cards"
+text = "Kamil's
+Cards"
 
 [node name="PausedOverlay" type="CanvasLayer" parent="Overlays" unique_id=1296161128]
 visible = false

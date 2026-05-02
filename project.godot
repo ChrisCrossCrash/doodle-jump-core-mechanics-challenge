@@ -26,6 +26,10 @@ window/stretch/mode="viewport"
 
 pause_menu_resume_button=""
 
+[gui]
+
+theme/custom="uid://bnl23st0c084j"
+
 [input]
 
 ui_accept={

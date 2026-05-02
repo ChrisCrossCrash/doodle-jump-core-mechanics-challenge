@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://bnl23st0c084j"]
+
+[ext_resource type="FontFile" uid="uid://dsqbw2byc30vi" path="res://assets/kenney_kenney-fonts/Fonts/Kenney Rocket.ttf" id="1_g1fjd"]
+
+[resource]
+default_font = ExtResource("1_g1fjd")
