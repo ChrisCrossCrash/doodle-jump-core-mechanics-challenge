@@ -14,6 +14,7 @@ signal bounce(pos: Vector2)
 ## The friction applied to the player when no input is applied.
 @export var friction := 500.0
 
+@onready var sprite: Sprite2D = $Sprite2D
 
 func _physics_process(delta: float) -> void:
     # Vertical movement
@@ -34,3 +35,8 @@ func _physics_process(delta: float) -> void:
         position.x = 0.0
 
     move_and_slide()
+
+
+func _process(_delta: float) -> void:
+    # Make Kamil face in the direction of movement.
+    sprite.flip_h = velocity.x < 0.0

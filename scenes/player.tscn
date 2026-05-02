@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://jnt2td0m8jej"]
 
 [ext_resource type="Script" uid="uid://b8jr7h3f7ud1q" path="res://scenes/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://claxtt6h3m826" path="res://icon.svg" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://df85wbk3haagc" path="res://assets/kamil_jumping.png" id="2_g2els"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(128, 126)
@@ -10,8 +10,9 @@ size = Vector2(128, 126)
 script = ExtResource("1_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=231923126]
-texture = ExtResource("2_qhqgy")
-metadata/_edit_lock_ = true
+position = Vector2(0, -65)
+scale = Vector2(8, 8)
+texture = ExtResource("2_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1909880591]
 shape = SubResource("RectangleShape2D_lbhrr")
