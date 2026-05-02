@@ -15,6 +15,14 @@ signal bounce(pos: Vector2)
 @export var friction := 500.0
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var col_shape: CollisionShape2D = $CollisionShape2D
+
+var col_shape_start_x: float
+
+
+func _ready() -> void:
+    col_shape_start_x = col_shape.position.x
+
 
 func _physics_process(delta: float) -> void:
     # Vertical movement
@@ -39,4 +47,12 @@ func _physics_process(delta: float) -> void:
 
 func _process(_delta: float) -> void:
     # Make Kamil face in the direction of movement.
-    sprite.flip_h = velocity.x < 0.0
+    # Only update facing when actually moving, so he keeps facing
+    # the last direction after coming to a stop.
+    if absf(velocity.x) > 0.1:
+        var flip := velocity.x < 0.0
+        sprite.flip_h = flip
+        if flip:
+            col_shape.position.x = -col_shape_start_x
+        else:
+            col_shape.position.x = col_shape_start_x
