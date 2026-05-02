@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://df85wbk3haagc" path="res://assets/kamil_jumping.png" id="2_g2els"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
-size = Vector2(128, 126)
+size = Vector2(32, 126)
 
 [node name="Player" type="CharacterBody2D" unique_id=2010971977]
 script = ExtResource("1_g2els")
@@ -13,7 +13,8 @@ script = ExtResource("1_g2els")
 position = Vector2(0, -65)
 scale = Vector2(8, 8)
 texture = ExtResource("2_g2els")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1909880591]
+position = Vector2(-16, 0)
 shape = SubResource("RectangleShape2D_lbhrr")
-metadata/_edit_lock_ = true
