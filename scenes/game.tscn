@@ -6,8 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://jnt2td0m8jej" path="res://scenes/player.tscn" id="3_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://bxxxng37sob3a" path="res://assets/bg_waterfall2.png" id="3_vtaks"]
 [ext_resource type="Script" uid="uid://b3uwuok8e6fxg" path="res://addons/c3_utils/c3_state_machine.gd" id="4_iywne"]
+[ext_resource type="Shader" uid="uid://datdbuldh6a4g" path="res://scenes/spray.gdshader" id="5_dinhu"]
+[ext_resource type="Texture2D" uid="uid://d3x3a3h0oco20" path="res://assets/bg_sprayl1.png" id="5_kvpfn"]
 [ext_resource type="Script" uid="uid://tt65as0ndvln" path="res://scenes/state_management/title_screen_state.gd" id="5_u5sy4"]
 [ext_resource type="Script" uid="uid://biqkhmpnbwqb1" path="res://scenes/state_management/gameplay_state.gd" id="6_gee14"]
+[ext_resource type="Texture2D" uid="uid://doe47sdn8wvow" path="res://assets/bg_sprayl2.png" id="6_kvuet"]
 [ext_resource type="Script" uid="uid://fka35liuwieb" path="res://scenes/state_management/paused_state.gd" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://cxqwknk1li03s" path="res://scenes/state_management/game_over_state.gd" id="8_vtaks"]
 
@@ -24,22 +27,38 @@ shader = ExtResource("2_0tnpc")
 shader_parameter/frame_two = ExtResource("3_vtaks")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_vtaks")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kvuet"]
+shader = ExtResource("5_dinhu")
+shader_parameter/frame_two = ExtResource("6_kvuet")
+shader_parameter/dither_speed = 5.2650002500875
+shader_parameter/density = 0.6410000304475
+
 [node name="Game" type="Node2D" unique_id=1146921331]
 process_mode = 3
 script = ExtResource("1_uwrxv")
 metadata/_edit_lock_ = true
 
-[node name="Background" type="Parallax2D" parent="." unique_id=712271777]
+[node name="Background" type="Node2D" parent="." unique_id=1648790303]
+
+[node name="Waterfall" type="Parallax2D" parent="Background" unique_id=712271777]
 repeat_size = Vector2(0, 1920)
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="Background" unique_id=1672117413]
+[node name="TextureRect" type="TextureRect" parent="Background/Waterfall" unique_id=1672117413]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_vtaks")
 offset_right = 1080.0
 offset_bottom = 1920.0
 texture = ExtResource("2_gee14")
 metadata/_edit_lock_ = true
+
+[node name="SprayOverlay" type="CanvasLayer" parent="Background" unique_id=2071053653]
+
+[node name="Spray" type="TextureRect" parent="Background/SprayOverlay" unique_id=946533463]
+material = SubResource("ShaderMaterial_kvuet")
+offset_right = 1080.0
+offset_bottom = 1920.0
+texture = ExtResource("5_kvpfn")
 
 [node name="Player" parent="." unique_id=2010971977 instance=ExtResource("3_lnu2h")]
 process_mode = 1
