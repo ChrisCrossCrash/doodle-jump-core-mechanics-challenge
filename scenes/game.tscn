@@ -126,7 +126,7 @@ offset_bottom = 839.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 128
 text = "Kamil's
-Cards"
+Climb"
 
 [node name="PausedOverlay" type="CanvasLayer" parent="Overlays" unique_id=1296161128]
 visible = false
