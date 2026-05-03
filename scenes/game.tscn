@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://fka35liuwieb" path="res://scenes/state_management/paused_state.gd" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://cxqwknk1li03s" path="res://scenes/state_management/game_over_state.gd" id="8_vtaks"]
 [ext_resource type="FontFile" uid="uid://b4a12pv0emf3b" path="res://assets/kenney_kenney-fonts/Fonts/Kenney Pixel.ttf" id="14_trtic"]
+[ext_resource type="AudioStream" uid="uid://bsohbaeumampq" path="res://assets/US_Army_Blues_-_10_-_BugaBlue.ogg" id="15_ir15t"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vtaks"]
 frequency = 1.0
@@ -212,6 +213,9 @@ theme_override_font_sizes/font_size = 64
 text = "Game Over!"
 
 [node name="Platforms" type="Node2D" parent="." unique_id=1112372684]
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1249922870]
+stream = ExtResource("15_ir15t")
 
 [connection signal="bounce" from="Player" to="StateMachine/GameplayState" method="_on_player_bounce"]
 [connection signal="pressed" from="Overlays/PausedOverlay/ResumeButton" to="StateMachine/PausedState" method="_on_resume_button_pressed"]

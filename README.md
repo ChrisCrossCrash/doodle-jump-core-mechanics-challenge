@@ -43,6 +43,8 @@ Here is my entry for the [itch.io Core Mechanics Challenge Jam, Spring 2026](htt
 
 - **Color palette:** [CC-29 by Alpha6](https://lospec.com/palette-list/cc-29)
 - **Fonts**: [Kenney Fonts](https://www.kenney.nl/assets/kenney-fonts)
+- **Music:** [BugaBlue by U.S. Army Blues](https://freemusicarchive.org/music/US_Army_Blues/Live_At_Blues_Alley)
+
 ## License
 
 Copyright (c) 2026 ChrisCrossCrash (https://github.com/ChrisCrossCrash). All rights reserved.

@@ -27,6 +27,7 @@ var _highest_platform_y := 0.0
 
 func enter(from: C3State) -> void:
     get_tree().paused = false
+    game.music.play()
     game.gameplay_overlay.show()
     if not from is PausedState:
         _initialize_platforms()
@@ -34,6 +35,7 @@ func enter(from: C3State) -> void:
 
 func exit() -> void:
     game.gameplay_overlay.hide()
+    game.music.stop()
 
 
 func process_input(event: InputEvent) -> C3State:
