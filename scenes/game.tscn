@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://doe47sdn8wvow" path="res://assets/bg_sprayl2.png" id="6_kvuet"]
 [ext_resource type="Script" uid="uid://fka35liuwieb" path="res://scenes/state_management/paused_state.gd" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://cxqwknk1li03s" path="res://scenes/state_management/game_over_state.gd" id="8_vtaks"]
+[ext_resource type="FontFile" uid="uid://b4a12pv0emf3b" path="res://assets/kenney_kenney-fonts/Fonts/Kenney Pixel.ttf" id="14_trtic"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vtaks"]
 frequency = 1.0
@@ -96,6 +97,7 @@ metadata/_custom_type_script = "uid://dcnmhrodlegcg"
 metadata/_edit_lock_ = true
 
 [node name="GameplayOverlay" type="CanvasLayer" parent="Overlays" unique_id=1956374334]
+layer = 2
 visible = false
 
 [node name="MaxHeightLabel" type="Label" parent="Overlays/GameplayOverlay" unique_id=324505171]
@@ -104,12 +106,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -14.5
-offset_top = -23.0
-offset_right = 14.5
+offset_left = -60.0
+offset_top = -96.0
+offset_right = 68.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 64
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_trtic")
+theme_override_font_sizes/font_size = 256
 text = "0 m"
 
 [node name="TitleScreenOverlay" type="CanvasLayer" parent="Overlays" unique_id=2001849394]
