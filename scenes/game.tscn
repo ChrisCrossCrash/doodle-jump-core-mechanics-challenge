@@ -224,8 +224,9 @@ grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
 theme_override_constants/shadow_offset_x = 8
 theme_override_constants/shadow_offset_y = 8
-theme_override_font_sizes/font_size = 64
-text = "Game Over!"
+theme_override_font_sizes/font_size = 128
+text = "Game
+Over!"
 
 [node name="MainMusic" type="AudioStreamPlayer" parent="." unique_id=1249922870]
 stream = ExtResource("15_ir15t")
