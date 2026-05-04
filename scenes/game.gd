@@ -55,6 +55,12 @@ func reset_game() -> void:
     camera.position.y = _player_position_start.y
 
 
+## Remove all spawned platforms.
+func clear_platforms() -> void:
+    for child in platforms.get_children():
+        child.queue_free()
+
+
 ## Given a world-space Y coordinate, returns the player's progress
 ## in pixels relative to the starting position.
 func y_coord_to_progress(y: float) -> float:

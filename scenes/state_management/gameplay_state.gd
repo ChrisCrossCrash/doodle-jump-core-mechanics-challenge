@@ -72,9 +72,7 @@ func _on_player_bounce(pos: Vector2) -> void:
 ## Clears all existing platforms and seeds a fresh set around the player's starting position.
 ## Called every time gameplay begins (including after game-over resets).
 func _initialize_platforms() -> void:
-    # Clear any existing platforms.
-    for child in game.platforms.get_children():
-        child.queue_free()
+    game.clear_platforms()
 
     # Place a starting platform just below the player.
     _highest_platform_y = game.player.position.y + 80.0

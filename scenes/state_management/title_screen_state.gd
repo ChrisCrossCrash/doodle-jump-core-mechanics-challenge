@@ -7,9 +7,7 @@ func enter(_from: C3State) -> void:
     get_tree().paused = true
     game.title_screen_overlay.show()
 
-    # Clear any existing platforms from previous games.
-    for child in game.platforms.get_children():
-        child.queue_free()
+    game.clear_platforms()
 
     game.player.sprite.animation = "idle"
 
