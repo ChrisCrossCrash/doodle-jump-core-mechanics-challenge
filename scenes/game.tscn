@@ -67,6 +67,11 @@ texture = ExtResource("5_kvpfn")
 
 [node name="Platforms" type="Node2D" parent="." unique_id=1112372684]
 
+[node name="StartingPlatform" type="Sprite2D" parent="." unique_id=52758551]
+position = Vector2(540, 960)
+scale = Vector2(8, 8)
+texture = ExtResource("18_ssvqc")
+
 [node name="Player" parent="." unique_id=2010971977 instance=ExtResource("3_lnu2h")]
 process_mode = 1
 position = Vector2(496, 1427)
@@ -241,11 +246,6 @@ parameters/looping = true
 [node name="GameOverMusic" type="AudioStreamPlayer" parent="." unique_id=443500860]
 stream = ExtResource("17_rysoc")
 volume_db = -2.0
-
-[node name="StartingPlatform" type="Sprite2D" parent="." unique_id=52758551]
-position = Vector2(540, 960)
-scale = Vector2(8, 8)
-texture = ExtResource("18_ssvqc")
 
 [connection signal="bounce" from="Player" to="StateMachine/GameplayState" method="_on_player_bounce"]
 [connection signal="pressed" from="Overlays/PausedOverlay/ResumeButton" to="StateMachine/PausedState" method="_on_resume_button_pressed"]
