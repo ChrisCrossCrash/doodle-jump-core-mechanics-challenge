@@ -14,15 +14,27 @@ const PLATFORM_HALF_WIDTH := 130.0
 ## How many pixels above the camera's top edge to pre-generate platforms.
 const SPAWN_LOOKAHEAD := 500.0
 
-## Minimum vertical distance between consecutive platforms.
-@export var min_gap := 150.0
+## Minimum vertical gap between platforms at the start of the game (dense phase).
+@export var min_gap_start := 80.0
 
-## Maximum vertical distance between consecutive platforms.
+## Maximum vertical gap between platforms at the start of the game (dense phase).
+@export var max_gap_start := 160.0
+
+## Minimum vertical gap between platforms at full difficulty (sparse phase).
+@export var min_gap := 200.0
+
+## Maximum vertical gap between platforms at full difficulty (sparse phase).
 ## Must be less than the player's max jump height (~510 px).
-@export var max_gap := 350.0
+@export var max_gap := 380.0
+
+## Height in pixels over which gaps ramp from the dense start to full-difficulty values.
+@export var ramp_distance := 100000.0
 
 ## The world-space Y of the highest platform generated so far; used as the cursor for upward generation.
 var _highest_platform_y := 0.0
+
+## The world-space Y of the first platform; the ramp origin for difficulty scaling.
+var _start_platform_y := 0.0
 
 
 func enter(from: C3State) -> void:
@@ -66,6 +78,7 @@ func _initialize_platforms() -> void:
 
     # Place a starting platform just below the player.
     _highest_platform_y = game.player.position.y + 80.0
+    _start_platform_y = _highest_platform_y
     _spawn_platform(Vector2(game.player.position.x, _highest_platform_y))
 
     # Generate the initial platforms.
@@ -81,7 +94,12 @@ func _initialize_platforms() -> void:
 func _generate_platforms_up_to(target_y: float) -> void:
     var viewport_width := game.get_viewport_rect().size.x
     while _highest_platform_y > target_y:
-        _highest_platform_y -= randf_range(min_gap, max_gap)
+        var difficulty := clampf((_start_platform_y - _highest_platform_y) / ramp_distance, 0.0, 1.0)
+        var gap := randf_range(
+            lerpf(min_gap_start, min_gap, difficulty),
+            lerpf(max_gap_start, max_gap, difficulty)
+        )
+        _highest_platform_y -= gap
         var x := randf_range(PLATFORM_HALF_WIDTH, viewport_width - PLATFORM_HALF_WIDTH)
         _spawn_platform(Vector2(x, _highest_platform_y))
 

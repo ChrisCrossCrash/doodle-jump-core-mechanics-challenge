@@ -16,6 +16,7 @@ fmod
 Kamil
 Kenney's
 lerp
+lerpf
 maxf
 minf
 onready
