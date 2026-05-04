@@ -73,6 +73,7 @@ jump_velocity = 1600.0
 [node name="Camera2D" type="Camera2D" parent="." unique_id=974198468]
 position = Vector2(540, 960)
 limit_bottom = 2300
+limit_smoothed = true
 position_smoothing_enabled = true
 metadata/_edit_lock_ = true
 

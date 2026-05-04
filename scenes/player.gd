@@ -14,7 +14,7 @@ signal bounce(pos: Vector2)
 ## The friction applied to the player when no input is applied.
 @export var friction := 500.0
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var col_shape: CollisionShape2D = $CollisionShape2D
 @onready var bounce_sound: AudioStreamPlayer2D = $BounceSound
 

@@ -11,9 +11,12 @@ func enter(_from: C3State) -> void:
     for child in game.platforms.get_children():
         child.queue_free()
 
+    game.player.sprite.animation = "idle"
+
 
 func exit() -> void:
     game.title_screen_overlay.hide()
+    game.player.sprite.animation = "jumping"
 
 
 func process_input(event: InputEvent) -> C3State:
