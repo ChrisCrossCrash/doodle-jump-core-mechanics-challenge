@@ -108,3 +108,4 @@ func _spawn_platform(pos: Vector2) -> Node2D:
 func _update_max_height_label() -> void:
     var progress = floori(game.y_coord_to_progress(game.camera.position.y) * 0.01)
     game.max_height_label.text = str(progress) + " m"
+    game.game_over_score_label.text = "Score: " + str(progress) + " m"

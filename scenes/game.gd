@@ -10,6 +10,7 @@ var _player_position_start: Vector2
 @onready var camera: Camera2D = $Camera2D
 @onready var player: CharacterBody2D = $Player
 @onready var max_height_label: Label = $Overlays/GameplayOverlay/MaxHeightLabel
+@onready var game_over_score_label: Label = $Overlays/GameOverOverlay/ScoreLabel
 @onready var music: AudioStreamPlayer = $MainMusic
 @onready var game_over_music: AudioStreamPlayer = $GameOverMusic
 
