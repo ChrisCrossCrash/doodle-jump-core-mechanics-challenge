@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://bsohbaeumampq" path="res://assets/US_Army_Blues_-_10_-_BugaBlue.ogg" id="15_ir15t"]
 [ext_resource type="AudioStream" uid="uid://2q3g6h7d0fa3" path="res://assets/waterfall_trimmed.ogg" id="16_ca42v"]
 [ext_resource type="AudioStream" uid="uid://bop45lj3sbug0" path="res://assets/game_over_US_Army_Blues_-_07_-_Bayou_Farewell.ogg" id="17_rysoc"]
+[ext_resource type="Texture2D" uid="uid://btg1qogwve4jn" path="res://assets/starting_platform.png" id="18_ssvqc"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vtaks"]
 frequency = 1.0
@@ -66,11 +67,12 @@ texture = ExtResource("5_kvpfn")
 
 [node name="Player" parent="." unique_id=2010971977 instance=ExtResource("3_lnu2h")]
 process_mode = 1
-position = Vector2(496, 1370)
+position = Vector2(496, 1427)
 jump_velocity = 1600.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=974198468]
 position = Vector2(540, 960)
+limit_bottom = 2300
 position_smoothing_enabled = true
 metadata/_edit_lock_ = true
 
@@ -237,6 +239,11 @@ parameters/looping = true
 [node name="GameOverMusic" type="AudioStreamPlayer" parent="." unique_id=443500860]
 stream = ExtResource("17_rysoc")
 volume_db = -2.0
+
+[node name="StartingPlatform" type="Sprite2D" parent="." unique_id=52758551]
+position = Vector2(540, 960)
+scale = Vector2(8, 8)
+texture = ExtResource("18_ssvqc")
 
 [connection signal="bounce" from="Player" to="StateMachine/GameplayState" method="_on_player_bounce"]
 [connection signal="pressed" from="Overlays/PausedOverlay/ResumeButton" to="StateMachine/PausedState" method="_on_resume_button_pressed"]
