@@ -47,6 +47,7 @@ Here is my entry for the [itch.io Core Mechanics Challenge Jam, Spring 2026](htt
 - **Game Over Music:** [Bayou Farewell by U.S. Army Blues](https://freemusicarchive.org/music/US_Army_Blues/Live_At_Blues_Alley)
 - **SFX:**
   - Waterfall: [Brazilian_Waterfall_River .wav by user SuperStudioBR on freesound.org](https://freesound.org/people/SuperStudioBR/sounds/669180/)
+  - Jump/Bounce: [Jump2 by user Edimar_Ramide on freesound.org](https://freesound.org/people/Edimar_Ramide/sounds/805690/)
 
 ## License
 

@@ -16,6 +16,7 @@ signal bounce(pos: Vector2)
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var col_shape: CollisionShape2D = $CollisionShape2D
+@onready var bounce_sound: AudioStreamPlayer2D = $BounceSound
 
 var col_shape_start_x: float
 
@@ -29,6 +30,7 @@ func _physics_process(delta: float) -> void:
     velocity += get_gravity() * delta
     if is_on_floor():
         velocity.y = -jump_velocity # Auto-jump
+        bounce_sound.play()
         bounce.emit(position)
 
     # Horizontal movement

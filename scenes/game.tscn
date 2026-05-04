@@ -226,6 +226,7 @@ text = "Game Over!"
 
 [node name="MainMusic" type="AudioStreamPlayer" parent="." unique_id=1249922870]
 stream = ExtResource("15_ir15t")
+volume_db = -2.0
 
 [node name="WaterfallSFX" type="AudioStreamPlayer" parent="." unique_id=1975152757]
 stream = ExtResource("16_ca42v")
@@ -235,6 +236,7 @@ parameters/looping = true
 
 [node name="GameOverMusic" type="AudioStreamPlayer" parent="." unique_id=443500860]
 stream = ExtResource("17_rysoc")
+volume_db = -2.0
 
 [connection signal="bounce" from="Player" to="StateMachine/GameplayState" method="_on_player_bounce"]
 [connection signal="pressed" from="Overlays/PausedOverlay/ResumeButton" to="StateMachine/PausedState" method="_on_resume_button_pressed"]
