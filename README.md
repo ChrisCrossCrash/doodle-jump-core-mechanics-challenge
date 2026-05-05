@@ -21,25 +21,18 @@ Here is my entry for the [itch.io Core Mechanics Challenge Jam, Spring 2026](htt
 
 ## My Submission
 
-**Working Title:** Kamil's Cards
+**Title:** Kamil's Climb
 
-**One Paragraph Pitch:** Kamil's Cards is a Doodle Jump inspired game where the player is a card-playing high-rolling Rocky Mountain Bighorn Sheep named Kamil. As Kamil climbs, he collects cards to make the perfect poker hand. When Kamil lands a poker hand, he gets a boost that rockets him up the mountain. The better the hand, the bigger the boost!
+**Description:** You play as Kamil, a cute Rocky Mountain bighorn sheep on a mission to climb as high as he can up a waterfall — until he inevitably tumbles back down (don't worry, he always splashes down safely). Jump between platforms as they get harder to reach, and see how high you can go before the fall.
 
-**Target Deadline:** May 4th 2026 at 4:00 AM CDT
+**Submitted:** May 5th 2026
 
-**Target Platform:** itch.io (web build), mobile accelerometer controls are a bonus
+**Platform:** itch.io (web build)
 
-**Three Design Pillars:**
+**What actually shipped:**
 
-- Playable without knowledge of poker, but more fun if you do know poker
-- It pays to be picky, but it's fun to catch a lucky break!
-- Each run is a one-off. No grinding or progression between runs.
+This was my first game jam. I originally planned an ambitious card-collecting mechanic where landing on platforms would build poker hands and trigger boost jumps. I deliberately spent a lot of time planning upfront (see ROADMAP.md), but about halfway through I realized I wouldn't have time to complete the card mechanic. I pivoted to delivering a minimal but complete Doodle Jump-style game instead.
 
-**Explicitly *out of scope*:**
-
-- Multiplayer
-- Mobile (app) build
-- Leaderboards
 
 ## Credits
 
