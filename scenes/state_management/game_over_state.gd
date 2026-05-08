@@ -5,12 +5,11 @@ extends BaseGameState
 
 func enter(_from: C3State) -> void:
     get_tree().paused = true
-    game.game_over_overlay.show()
+    game.overlay_manager.show_overlay(game.overlay_manager.Overlay.GAME_OVER)
     game.game_over_music.play()
 
 
 func exit() -> void:
-    game.game_over_overlay.hide()
     game.game_over_music.stop()
 
 
