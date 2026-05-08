@@ -57,17 +57,18 @@ func process_input(event: InputEvent) -> C3State:
 
 
 func process_physics(_delta: float) -> C3State:
-    var fall_distance := -(game.camera.position.y - game.player.position.y)
+    var fall_distance := game.get_fall_distance()
     if fall_distance > FALL_DEATH_THRESHOLD:
         return game.game_over_state
     return null
 
 
 func _on_player_bounce(pos: Vector2) -> void:
-    game.camera.position.y = min(pos.y, game.camera.position.y)
+    game.set_camera_pos_y(min(pos.y, game.get_camera_pos_y()))
     _update_platforms()
 
 
+# TODO: Move this to game.gd and expose it as a public method.
 ## Clears all existing platforms and seeds a fresh set around the player's starting position.
 ## Called every time gameplay begins (including after game-over resets).
 func _initialize_platforms() -> void:
@@ -82,10 +83,11 @@ func _initialize_platforms() -> void:
     var viewport_half_h := game.get_viewport_rect().size.y * 0.5
     # camera_target is the desired camera center; subtracting half the viewport
     # height gives the top edge in world space.
-    var camera_top := game.camera.position.y + game.camera.offset.y - viewport_half_h
+    var camera_top := game._camera.position.y + game._camera.offset.y - viewport_half_h
     _generate_platforms_up_to(camera_top - SPAWN_LOOKAHEAD)
 
 
+# TODO: Move this to game.gd and expose it as a public method.
 ## Instantiates platforms at random horizontal positions, stepping upward by random gaps,
 ## until target_y is reached or exceeded.
 func _generate_platforms_up_to(target_y: float) -> void:
@@ -101,11 +103,12 @@ func _generate_platforms_up_to(target_y: float) -> void:
         _spawn_platform(Vector2(x, _highest_platform_y))
 
 
+# TODO: Move this to game.gd and expose it as a public method.
 ## Spawns new platforms ahead of the camera target and frees platforms that have
 ## scrolled off the bottom of the screen. Called on every player bounce.
 func _update_platforms() -> void:
     var viewport_half_h := game.get_viewport_rect().size.y * 0.5
-    var spawn_camera_top := game.camera.position.y + game.camera.offset.y - viewport_half_h
+    var spawn_camera_top := game._camera.position.y + game._camera.offset.y - viewport_half_h
     if _highest_platform_y > spawn_camera_top - SPAWN_LOOKAHEAD:
         _generate_platforms_up_to(spawn_camera_top - SPAWN_LOOKAHEAD)
 

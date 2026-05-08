@@ -12,7 +12,7 @@ const PX_PER_M := 100
 ## Kamil's vertical progress in meters.
 var progress_m: int = 0
 
-@onready var camera: Camera2D = $Camera2D
+@onready var _camera: Camera2D = $Camera2D
 @onready var player: CharacterBody2D = $Player
 @onready var _max_height_label: Label = $Overlays/GameplayOverlay/MaxHeightLabel
 @onready var _game_over_score_label: Label = $Overlays/GameOverOverlay/ScoreLabel
@@ -37,8 +37,8 @@ var progress_m: int = 0
 
 func _ready() -> void:
     state_machine.init(self)
-    camera.offset.y = camera_offset
-    camera.position.y = player.position.y
+    _camera.offset.y = camera_offset
+    _camera.position.y = player.position.y
     _player_position_start = player.position
 
     # Don't show the quit button on the web build version.
@@ -54,7 +54,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _process(_delta: float) -> void:
-    progress_m = floori(y_coord_to_progress(camera.position.y) / PX_PER_M)
+    progress_m = floori(y_coord_to_progress(_camera.position.y) / PX_PER_M)
     set_max_height_label(progress_m)
     set_game_over_height_label(progress_m)
 
@@ -64,7 +64,7 @@ func _process(_delta: float) -> void:
 func reset_game() -> void:
     player.position = _player_position_start
     player.velocity = Vector2.ZERO
-    camera.position.y = _player_position_start.y
+    _camera.position.y = _player_position_start.y
 
 
 ## Remove all spawned platforms.
@@ -89,3 +89,15 @@ func set_max_height_label(height: int) -> void:
 ## on the bottom of the screen on the game over screen.
 func set_game_over_height_label(height: int) -> void:
     _game_over_score_label.text = "Score: " + str(height) + " m"
+
+
+func get_camera_pos_y() -> float:
+    return _camera.position.y
+
+
+func set_camera_pos_y(y: float) -> void:
+    _camera.position.y = y
+
+
+func get_fall_distance() -> float:
+    return -(get_camera_pos_y() - player.position.y)
