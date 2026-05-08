@@ -7,10 +7,15 @@ extends Node2D
 
 var _player_position_start: Vector2
 
+const PX_PER_M := 100
+
+## Kamil's vertical progress in meters.
+var progress_m: int = 0
+
 @onready var camera: Camera2D = $Camera2D
 @onready var player: CharacterBody2D = $Player
-@onready var max_height_label: Label = $Overlays/GameplayOverlay/MaxHeightLabel
-@onready var game_over_score_label: Label = $Overlays/GameOverOverlay/ScoreLabel
+@onready var _max_height_label: Label = $Overlays/GameplayOverlay/MaxHeightLabel
+@onready var _game_over_score_label: Label = $Overlays/GameOverOverlay/ScoreLabel
 @onready var music: AudioStreamPlayer = $MainMusic
 @onready var game_over_music: AudioStreamPlayer = $GameOverMusic
 
@@ -48,6 +53,13 @@ func _input(event: InputEvent) -> void:
             get_tree().reload_current_scene()
 
 
+func _process(_delta: float) -> void:
+    progress_m = floori(y_coord_to_progress(camera.position.y) / PX_PER_M)
+    set_max_height_label(progress_m)
+    set_game_over_height_label(progress_m)
+
+
+
 ## Resets the player and camera to starting positions.
 func reset_game() -> void:
     player.position = _player_position_start
@@ -65,3 +77,15 @@ func clear_platforms() -> void:
 ## in pixels relative to the starting position.
 func y_coord_to_progress(y: float) -> float:
     return _player_position_start.y - y
+
+
+## Set the value to be displayed on the height label
+## on the bottom of the screen during gameplay.
+func set_max_height_label(height: int) -> void:
+    _max_height_label.text = str(height) + " m"
+
+
+## Set the value to be displayed on the game over height label
+## on the bottom of the screen on the game over screen.
+func set_game_over_height_label(height: int) -> void:
+    _game_over_score_label.text = "Score: " + str(height) + " m"
