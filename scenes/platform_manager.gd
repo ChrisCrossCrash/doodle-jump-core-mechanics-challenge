@@ -2,7 +2,8 @@ class_name PlatformManager
 extends Node2D
 
 
-## The platform scene instantiated by the generator.
+var game: Game
+
 const PLATFORM_SCENE := preload("res://scenes/platform.tscn")
 
 ## Half the platform collision width (260 px), used to keep platforms fully on-screen.
@@ -42,27 +43,27 @@ func clear() -> void:
 
 ## Clears all existing platforms and seeds a fresh set around the player's starting position.
 ## Called every time gameplay begins (including after game-over resets).
-func initialize(start_pos_player: Vector2, camera: Camera2D) -> void:
+func initialize() -> void:
     clear()
 
     # Place a starting platform just below the player.
-    _highest_platform_y = start_pos_player.y + 80.0
+    _highest_platform_y = game.player.position.y + 80.0
     _start_platform_y = _highest_platform_y
-    _spawn_platform(Vector2(start_pos_player.x, _highest_platform_y))
+    _spawn_platform(Vector2(game.player.position.x, _highest_platform_y))
 
     # Generate the initial platforms.
     var viewport_half_h := get_viewport_rect().size.y * 0.5
-    # camera_target is the desired camera center; subtracting half the viewport
+    # game.camera.position is the desired camera center; subtracting half the viewport
     # height gives the top edge in world space.
-    var camera_top := camera.position.y + camera.offset.y - viewport_half_h
+    var camera_top := game.camera.position.y + game.camera.offset.y - viewport_half_h
     _generate_platforms_up_to(camera_top - SPAWN_LOOKAHEAD)
 
 
-## Spawns new platforms ahead of the camera target and frees platforms that have
-## scrolled off the bottom of the screen. Called on every player bounce.
-func update(camera: Camera2D) -> void:
+## Spawns new platforms ahead of the camera and culls those that have scrolled off-screen.
+## Called on every player bounce.
+func update() -> void:
     var viewport_half_h := get_viewport_rect().size.y * 0.5
-    var spawn_camera_top := camera.position.y + camera.offset.y - viewport_half_h
+    var spawn_camera_top := game.camera.position.y + game.camera.offset.y - viewport_half_h
     if _highest_platform_y > spawn_camera_top - SPAWN_LOOKAHEAD:
         _generate_platforms_up_to(spawn_camera_top - SPAWN_LOOKAHEAD)
 

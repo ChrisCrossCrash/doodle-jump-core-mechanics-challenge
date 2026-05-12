@@ -5,9 +5,9 @@ extends BaseGameState
 
 func enter(_from: C3State) -> void:
     get_tree().paused = true
-    game.show_overlay(OverlayManager.Overlay.TITLE_SCREEN)
+    game.overlay_manager.show_overlay(OverlayManager.Overlay.TITLE_SCREEN)
 
-    game.clear_platforms()
+    game.platform_manager.clear()
 
     game.player.sprite.animation = "idle"
 

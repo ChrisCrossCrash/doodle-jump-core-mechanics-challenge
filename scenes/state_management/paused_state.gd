@@ -5,7 +5,7 @@ extends BaseGameState
 
 func enter(_from: C3State) -> void:
     get_tree().paused = true
-    game.show_overlay(OverlayManager.Overlay.PAUSED)
+    game.overlay_manager.show_overlay(OverlayManager.Overlay.PAUSED)
     var resume_button: Button = get_tree().get_first_node_in_group("pause_menu_resume_button")
     resume_button.grab_focus()
 
