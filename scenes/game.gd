@@ -2,7 +2,7 @@ class_name Game
 extends Node2D
 ## Root scene that owns all subsystems and serves as the shared context for the state machine.
 
-## The amount of offset (in pixels) to apply to the camera relative to the player.
+## The amount of offset (in pixels) to apply to the _camera relative to the player.
 @export var camera_offset := -DisplayServer.window_get_size().y / 4.0
 
 var _player_position_start: Vector2
@@ -19,7 +19,7 @@ var progress_m: int = 0
 
 @onready var overlay_manager: OverlayManager = $OverlayManager
 
-@onready var platforms: Node2D = $Platforms
+@onready var _platform_manager: Node2D = $PlatformManager
 
 @onready var state_machine: C3StateMachine = $StateMachine
 @onready var title_screen_state: TitleScreenState = $StateMachine/TitleScreenState
@@ -49,17 +49,12 @@ func _process(_delta: float) -> void:
 
 
 
-## Resets the player and camera to starting positions.
+## Resets the player and _camera to starting positions.
 func reset_game() -> void:
     player.position = _player_position_start
     player.velocity = Vector2.ZERO
     _camera.position.y = _player_position_start.y
-
-
-## Remove all spawned platforms.
-func clear_platforms() -> void:
-    for child in platforms.get_children():
-        child.queue_free()
+    _platform_manager.clear()
 
 
 ## Given a world-space Y coordinate, returns the player's progress
@@ -68,13 +63,32 @@ func y_coord_to_progress(y: float) -> float:
     return _player_position_start.y - y
 
 
+## Returns the camera's current world-space Y position.
 func get_camera_pos_y() -> float:
     return _camera.position.y
 
 
+## Sets the camera's world-space Y position directly.
 func set_camera_pos_y(y: float) -> void:
     _camera.position.y = y
 
 
+## Returns how far below the camera the player currently is, in pixels.[br]
+## A positive value means the player has fallen beneath the camera's view.
 func get_fall_distance() -> float:
     return -(get_camera_pos_y() - player.position.y)
+
+
+## Seeds the platform manager with an initial spread of platforms around the player's starting position.
+func initialize_platforms() -> void:
+    _platform_manager.initialize(player.position, _camera)
+
+
+## Advances the platform manager each frame, spawning and culling platforms as the camera moves.
+func update_platforms() -> void:
+    _platform_manager.update(_camera)
+
+
+## Removes all active platforms, typically called on game reset.
+func clear_platforms() -> void:
+    _platform_manager.clear()
