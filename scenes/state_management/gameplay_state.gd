@@ -9,7 +9,7 @@ const FALL_DEATH_THRESHOLD := 960.0
 func enter(from: C3State) -> void:
     get_tree().paused = false
     game.music.play()
-    game.overlay_manager.show_overlay(game.overlay_manager.Overlay.GAMEPLAY)
+    game.show_overlay(OverlayManager.Overlay.GAMEPLAY)
     if not from is PausedState:
         game.initialize_platforms()
 

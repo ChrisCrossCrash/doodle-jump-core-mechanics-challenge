@@ -17,7 +17,7 @@ var progress_m: int = 0
 @onready var music: AudioStreamPlayer = $MainMusic
 @onready var game_over_music: AudioStreamPlayer = $GameOverMusic
 
-@onready var overlay_manager: OverlayManager = $OverlayManager
+@onready var _overlay_manager: OverlayManager = $OverlayManager
 
 @onready var _platform_manager: Node2D = $PlatformManager
 
@@ -45,7 +45,7 @@ func _input(event: InputEvent) -> void:
 
 func _process(_delta: float) -> void:
     progress_m = floori(y_coord_to_progress(_camera.position.y) / PX_PER_M)
-    overlay_manager.set_progress_labels(progress_m)
+    _overlay_manager.set_progress_labels(progress_m)
 
 
 
@@ -92,3 +92,8 @@ func update_platforms() -> void:
 ## Removes all active platforms, typically called on game reset.
 func clear_platforms() -> void:
     _platform_manager.clear()
+
+
+## Switches to the specified overlay.
+func show_overlay(overlay: OverlayManager.Overlay) -> void:
+    _overlay_manager.show_overlay(overlay)
