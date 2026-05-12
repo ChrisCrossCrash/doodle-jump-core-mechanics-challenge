@@ -4,6 +4,16 @@ This file defines conventions and guidelines for this Godot 4 project. Follow th
 
 ---
 
+## Architecture
+
+State scripts and other outside code interact with the game through the `Game` node, which acts as the primary API boundary. Children of `Game` are treated as private unless they fall into one of two categories:
+
+**Core game entities** (`player`, `camera`) are exposed as public members. These are fundamental objects with rich, open-ended interfaces — states read and write their properties, connect to their signals, and so on. Wrapping every possible interaction through `Game` would produce endless boilerplate without adding value.
+
+**Subsystem managers** (`PlatformManager`, `OverlayManager`, audio nodes, etc.) are private. `Game` exposes thin wrapper methods that delegate to them (e.g. `initialize_platforms()`, `show_overlay()`). The wrappers exist because the managers themselves are private — outside callers have no direct way to reach them. `Game` assembles whatever internal members the manager needs and passes them in.
+
+The short version of the rule: **talk to `Game`, not to its subsystems.**
+
 ## Code Style
 
 ### Indentation

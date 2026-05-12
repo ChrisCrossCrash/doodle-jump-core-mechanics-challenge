@@ -8,14 +8,14 @@ const FALL_DEATH_THRESHOLD := 960.0
 
 func enter(from: C3State) -> void:
     get_tree().paused = false
-    game.music.play()
+    game.play_music()
     game.show_overlay(OverlayManager.Overlay.GAMEPLAY)
     if not from is PausedState:
         game.initialize_platforms()
 
 
 func exit() -> void:
-    game.music.stop()
+    game.stop_music()
 
 
 func process_input(event: InputEvent) -> C3State:
@@ -32,5 +32,5 @@ func process_physics(_delta: float) -> C3State:
 
 
 func _on_player_bounce(pos: Vector2) -> void:
-    game.set_camera_pos_y(min(pos.y, game.get_camera_pos_y()))
+    game.camera.position.y = min(pos.y, game.camera.position.y)
     game.update_platforms()
