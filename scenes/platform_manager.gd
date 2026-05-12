@@ -2,12 +2,6 @@ class_name PlatformManager
 extends Node2D
 
 
-## The world-space Y of the highest platform generated so far; used as the cursor for upward generation.
-var _highest_platform_y := 0.0
-
-## The world-space Y of the first platform; the ramp origin for difficulty scaling.
-var _start_platform_y := 0.0
-
 ## The platform scene instantiated by the generator.
 const PLATFORM_SCENE := preload("res://scenes/platform.tscn")
 
@@ -32,6 +26,12 @@ const SPAWN_LOOKAHEAD := 500.0
 
 ## Height in pixels over which gaps ramp from the dense start to full-difficulty values.
 @export var ramp_distance := 100000.0
+
+## The world-space Y of the highest platform generated so far; used as the cursor for upward generation.
+var _highest_platform_y := 0.0
+
+## The world-space Y of the first platform; the ramp origin for difficulty scaling.
+var _start_platform_y := 0.0
 
 
 ## Remove all spawned platforms.
@@ -82,8 +82,7 @@ func _generate_platforms_up_to(target_y: float) -> void:
         _spawn_platform(Vector2(x, _highest_platform_y))
 
 
-## Instantiates a platform at the given world-space position and adds it to the platforms node.
-## Returns the new platform instance, which can be used for further configuration if needed.
+## Instantiates a platform at the given world-space position and adds it as a child.
 func _spawn_platform(pos: Vector2) -> Node2D:
     var platform := PLATFORM_SCENE.instantiate() as Platform
     platform.position = pos

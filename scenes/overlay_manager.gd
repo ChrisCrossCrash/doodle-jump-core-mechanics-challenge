@@ -1,5 +1,6 @@
 class_name OverlayManager
 extends Node2D
+## Manages visibility of the game's full-screen overlays (HUD, title, pause, game over).
 
 enum Overlay { GAMEPLAY, TITLE_SCREEN, PAUSED, GAME_OVER }
 
@@ -11,6 +12,7 @@ enum Overlay { GAMEPLAY, TITLE_SCREEN, PAUSED, GAME_OVER }
 @onready var _max_height_label: Label = $GameplayOverlay/MaxHeightLabel
 @onready var _game_over_score_label: Label = $GameOverOverlay/ScoreLabel
 @onready var _pause_screen_quit_button: Button = $PausedOverlay/QuitButton
+
 
 func _ready() -> void:
     # Don't show the quit button on the web build version.
@@ -34,7 +36,7 @@ func show_overlay(selected_overlay: Overlay) -> void:
             _game_over_overlay.show()
 
 
-# Update the overlays with the player's current progress in meters.
+## Updates the progress labels with the player's current height in meters.
 func set_progress_labels(progress_m: int) -> void:
     _max_height_label.text = str(progress_m) + " m"
     _game_over_score_label.text = "Score: " + str(progress_m) + " m"
