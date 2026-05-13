@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dyc5nisfq5m4h" path="res://assets/bg_waterfall1.png" id="2_gee14"]
 [ext_resource type="PackedScene" uid="uid://jnt2td0m8jej" path="res://scenes/player.tscn" id="3_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://bxxxng37sob3a" path="res://assets/bg_waterfall2.png" id="3_vtaks"]
-[ext_resource type="Script" uid="uid://b3uwuok8e6fxg" path="res://assets/c3_utils/c3_state_machine.gd" id="4_iywne"]
+[ext_resource type="Script" uid="uid://b3uwuok8e6fxg" path="res://addons/c3_utils/c3_state_machine.gd" id="4_iywne"]
 [ext_resource type="Shader" uid="uid://datdbuldh6a4g" path="res://scenes/spray.gdshader" id="5_dinhu"]
 [ext_resource type="Texture2D" uid="uid://d3x3a3h0oco20" path="res://assets/bg_sprayl1.png" id="5_kvpfn"]
 [ext_resource type="Script" uid="uid://tt65as0ndvln" path="res://scenes/state_management/title_screen_state.gd" id="5_u5sy4"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://2q3g6h7d0fa3" path="res://assets/waterfall_trimmed.ogg" id="16_ca42v"]
 [ext_resource type="AudioStream" uid="uid://bop45lj3sbug0" path="res://assets/game_over_US_Army_Blues_-_07_-_Bayou_Farewell.ogg" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://btg1qogwve4jn" path="res://assets/starting_platform.png" id="18_ssvqc"]
+[ext_resource type="Script" uid="uid://7kqs1sceivpo" path="res://scenes/card_manager.gd" id="21_5newe"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vtaks"]
 frequency = 1.0
@@ -268,6 +269,9 @@ parameters/looping = true
 [node name="GameOverMusic" type="AudioStreamPlayer" parent="." unique_id=443500860]
 stream = ExtResource("17_rysoc")
 volume_db = -2.0
+
+[node name="CardManager" type="Node2D" parent="." unique_id=2093134068]
+script = ExtResource("21_5newe")
 
 [connection signal="bounce" from="Player" to="StateMachine/GameplayState" method="_on_player_bounce"]
 [connection signal="pressed" from="OverlayManager/PausedOverlay/ResumeButton" to="StateMachine/PausedState" method="_on_resume_button_pressed"]
