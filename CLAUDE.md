@@ -84,6 +84,7 @@ Follow Godot's recommended declaration order within a class:
 11. Built-in virtual methods (`_ready`, `_process`, `_physics_process`, etc.)
 12. Public methods
 13. Private methods (prefix with `_`)
+14. Inner classes (`class InnerName:`)
 
 ---
 

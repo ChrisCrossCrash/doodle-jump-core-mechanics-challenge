@@ -13,20 +13,10 @@ enum HandType {
 }
 
 
-class Card:
-    var suit: Suit
-    var rank: Rank
-
-    func _init(p_suit: Suit, p_rank: Rank):
-        self.suit = p_suit
-        self.rank = p_rank
-
-
 ## Return the best hand type in a set of five cards.
 static func get_best_hand(cards: Array[Card]) -> HandType:
     assert(cards.size() == 5, "Exactly 5 cards are required to evaluate a hand.")
 
-    # Sort the cards by rank
     cards.sort_custom(_sort_cards)
 
     var suits := C3Utils.HashSet.new()
@@ -45,7 +35,7 @@ static func get_best_hand(cards: Array[Card]) -> HandType:
                 is_straight = false
                 continue
     # Handle the case of a wheel/bicycle hand
-    var hand_ranks = _get_hand_ranks(cards)
+    var hand_ranks := _get_hand_ranks(cards)
     if hand_ranks == [Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE, Rank.ACE]:
         is_straight = true
 
@@ -98,5 +88,14 @@ static func _get_rank_counts(cards: Array[Card]) -> Array[int]:
     var counts: Array[int] = []
     for v in by_rank.values():
         counts.append(v)
-    counts.sort_custom(func(a, b): return a > b)
+    counts.sort_custom(func(a: int, b: int) -> bool: return a > b)
     return counts
+
+
+class Card:
+    var suit: Suit
+    var rank: Rank
+
+    func _init(p_suit: Suit, p_rank: Rank) -> void:
+        self.suit = p_suit
+        self.rank = p_rank
