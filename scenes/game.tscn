@@ -5,19 +5,22 @@
 [ext_resource type="Texture2D" uid="uid://dyc5nisfq5m4h" path="res://assets/bg_waterfall1.png" id="2_gee14"]
 [ext_resource type="PackedScene" uid="uid://jnt2td0m8jej" path="res://scenes/player.tscn" id="3_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://bxxxng37sob3a" path="res://assets/bg_waterfall2.png" id="3_vtaks"]
-[ext_resource type="Script" uid="uid://b3uwuok8e6fxg" path="res://assets/c3_utils/c3_state_machine.gd" id="4_iywne"]
+[ext_resource type="Script" uid="uid://b3uwuok8e6fxg" path="res://addons/c3_utils/c3_state_machine.gd" id="4_iywne"]
 [ext_resource type="Shader" uid="uid://datdbuldh6a4g" path="res://scenes/spray.gdshader" id="5_dinhu"]
 [ext_resource type="Texture2D" uid="uid://d3x3a3h0oco20" path="res://assets/bg_sprayl1.png" id="5_kvpfn"]
 [ext_resource type="Script" uid="uid://tt65as0ndvln" path="res://scenes/state_management/title_screen_state.gd" id="5_u5sy4"]
 [ext_resource type="Script" uid="uid://biqkhmpnbwqb1" path="res://scenes/state_management/gameplay_state.gd" id="6_gee14"]
 [ext_resource type="Texture2D" uid="uid://doe47sdn8wvow" path="res://assets/bg_sprayl2.png" id="6_kvuet"]
 [ext_resource type="Script" uid="uid://fka35liuwieb" path="res://scenes/state_management/paused_state.gd" id="7_0tnpc"]
+[ext_resource type="Script" uid="uid://b232ny1rw76qe" path="res://scenes/platform_manager.gd" id="8_1kice"]
 [ext_resource type="Script" uid="uid://cxqwknk1li03s" path="res://scenes/state_management/game_over_state.gd" id="8_vtaks"]
 [ext_resource type="FontFile" uid="uid://b4a12pv0emf3b" path="res://assets/kenney_kenney-fonts/Fonts/Kenney Pixel.ttf" id="14_trtic"]
+[ext_resource type="Script" uid="uid://cw3eldfhhxrjp" path="res://scenes/overlay_manager.gd" id="15_264po"]
 [ext_resource type="AudioStream" uid="uid://bsohbaeumampq" path="res://assets/US_Army_Blues_-_10_-_BugaBlue.ogg" id="15_ir15t"]
 [ext_resource type="AudioStream" uid="uid://2q3g6h7d0fa3" path="res://assets/waterfall_trimmed.ogg" id="16_ca42v"]
 [ext_resource type="AudioStream" uid="uid://bop45lj3sbug0" path="res://assets/game_over_US_Army_Blues_-_07_-_Bayou_Farewell.ogg" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://btg1qogwve4jn" path="res://assets/starting_platform.png" id="18_ssvqc"]
+[ext_resource type="Script" uid="uid://7kqs1sceivpo" path="res://scenes/card_manager.gd" id="21_5newe"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vtaks"]
 frequency = 1.0
@@ -65,7 +68,8 @@ offset_right = 1080.0
 offset_bottom = 1920.0
 texture = ExtResource("5_kvpfn")
 
-[node name="Platforms" type="Node2D" parent="." unique_id=1112372684]
+[node name="PlatformManager" type="Node2D" parent="." unique_id=1112372684]
+script = ExtResource("8_1kice")
 
 [node name="StartingPlatform" type="Sprite2D" parent="." unique_id=52758551]
 position = Vector2(540, 960)
@@ -106,14 +110,15 @@ metadata/_custom_type_script = "uid://dcnmhrodlegcg"
 script = ExtResource("8_vtaks")
 metadata/_custom_type_script = "uid://dcnmhrodlegcg"
 
-[node name="Overlays" type="Node2D" parent="." unique_id=1345659342]
+[node name="OverlayManager" type="Node2D" parent="." unique_id=1345659342]
+script = ExtResource("15_264po")
 metadata/_edit_lock_ = true
 
-[node name="GameplayOverlay" type="CanvasLayer" parent="Overlays" unique_id=1956374334]
+[node name="GameplayOverlay" type="CanvasLayer" parent="OverlayManager" unique_id=1956374334]
 layer = 2
 visible = false
 
-[node name="MaxHeightLabel" type="Label" parent="Overlays/GameplayOverlay" unique_id=324505171]
+[node name="MaxHeightLabel" type="Label" parent="OverlayManager/GameplayOverlay" unique_id=324505171]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -131,10 +136,10 @@ theme_override_fonts/font = ExtResource("14_trtic")
 theme_override_font_sizes/font_size = 256
 text = "0 m"
 
-[node name="TitleScreenOverlay" type="CanvasLayer" parent="Overlays" unique_id=2001849394]
+[node name="TitleScreenOverlay" type="CanvasLayer" parent="OverlayManager" unique_id=2001849394]
 visible = false
 
-[node name="TitleLabel" type="Label" parent="Overlays/TitleScreenOverlay" unique_id=974283512]
+[node name="TitleLabel" type="Label" parent="OverlayManager/TitleScreenOverlay" unique_id=974283512]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -150,10 +155,10 @@ theme_override_font_sizes/font_size = 128
 text = "Kamil's
 Climb"
 
-[node name="PausedOverlay" type="CanvasLayer" parent="Overlays" unique_id=1296161128]
+[node name="PausedOverlay" type="CanvasLayer" parent="OverlayManager" unique_id=1296161128]
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="Overlays/PausedOverlay" unique_id=589679739]
+[node name="ColorRect" type="ColorRect" parent="OverlayManager/PausedOverlay" unique_id=589679739]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -161,7 +166,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.21950102, 0.21950102, 0.21950102, 1)
 
-[node name="PausedLabel" type="Label" parent="Overlays/PausedOverlay" unique_id=169210855]
+[node name="PausedLabel" type="Label" parent="OverlayManager/PausedOverlay" unique_id=169210855]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -176,7 +181,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "Game Paused"
 
-[node name="ResumeButton" type="Button" parent="Overlays/PausedOverlay" unique_id=1537219977 groups=["pause_menu_resume_button"]]
+[node name="ResumeButton" type="Button" parent="OverlayManager/PausedOverlay" unique_id=1537219977 groups=["pause_menu_resume_button"]]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -193,7 +198,7 @@ focus_neighbor_bottom = NodePath("../QuitButton")
 theme_override_font_sizes/font_size = 32
 text = "Resume"
 
-[node name="QuitButton" type="Button" parent="Overlays/PausedOverlay" unique_id=1285669216]
+[node name="QuitButton" type="Button" parent="OverlayManager/PausedOverlay" unique_id=1285669216]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -211,10 +216,10 @@ theme_override_font_sizes/font_size = 32
 text = "Quit
 "
 
-[node name="GameOverOverlay" type="CanvasLayer" parent="Overlays" unique_id=210742583]
+[node name="GameOverOverlay" type="CanvasLayer" parent="OverlayManager" unique_id=210742583]
 visible = false
 
-[node name="GameOverLabel" type="Label" parent="Overlays/GameOverOverlay" unique_id=474900693]
+[node name="GameOverLabel" type="Label" parent="OverlayManager/GameOverOverlay" unique_id=474900693]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -233,7 +238,7 @@ theme_override_font_sizes/font_size = 128
 text = "Game
 Over!"
 
-[node name="ScoreLabel" type="Label" parent="Overlays/GameOverOverlay" unique_id=1526831974]
+[node name="ScoreLabel" type="Label" parent="OverlayManager/GameOverOverlay" unique_id=1526831974]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -265,6 +270,9 @@ parameters/looping = true
 stream = ExtResource("17_rysoc")
 volume_db = -2.0
 
+[node name="CardManager" type="Node2D" parent="." unique_id=2093134068]
+script = ExtResource("21_5newe")
+
 [connection signal="bounce" from="Player" to="StateMachine/GameplayState" method="_on_player_bounce"]
-[connection signal="pressed" from="Overlays/PausedOverlay/ResumeButton" to="StateMachine/PausedState" method="_on_resume_button_pressed"]
-[connection signal="pressed" from="Overlays/PausedOverlay/QuitButton" to="StateMachine/PausedState" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="OverlayManager/PausedOverlay/ResumeButton" to="StateMachine/PausedState" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="OverlayManager/PausedOverlay/QuitButton" to="StateMachine/PausedState" method="_on_quit_button_pressed"]

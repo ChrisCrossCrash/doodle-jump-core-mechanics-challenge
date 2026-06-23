@@ -4,6 +4,16 @@ This file defines conventions and guidelines for this Godot 4 project. Follow th
 
 ---
 
+## Architecture
+
+State scripts and other outside code interact with the game through the `Game` node, which acts as the primary API boundary. Children of `Game` are treated as private unless they fall into one of two categories:
+
+**Core game entities** (`player`, `camera`) are exposed as public members. These are fundamental objects with rich, open-ended interfaces — states read and write their properties, connect to their signals, and so on. Wrapping every possible interaction through `Game` would produce endless boilerplate without adding value.
+
+**Subsystem managers** (`PlatformManager`, `OverlayManager`, etc.) are also exposed as public members. Their methods are called directly by states (e.g. `game.platform_manager.initialize()`, `game.overlay_manager.show_overlay()`). Managers that need access to other `Game` members receive a reference to `Game` via dependency injection in `_ready()`. Raw implementation nodes that don't warrant a manager class (audio players, etc.) remain private, with thin wrapper methods on `Game` as needed.
+
+The short version of the rule: **talk to `Game`, not to its unexposed internals.**
+
 ## Code Style
 
 ### Indentation
@@ -74,6 +84,7 @@ Follow Godot's recommended declaration order within a class:
 11. Built-in virtual methods (`_ready`, `_process`, `_physics_process`, etc.)
 12. Public methods
 13. Private methods (prefix with `_`)
+14. Inner classes (`class InnerName:`)
 
 ---
 

@@ -22,6 +22,10 @@ window/size/viewport_height=1920
 window/size/mode=4
 window/stretch/mode="viewport"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [global_group]
 
 pause_menu_resume_button=""

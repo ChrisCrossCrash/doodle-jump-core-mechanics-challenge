@@ -7,37 +7,37 @@ extends Node2D
 
 var _player_position_start: Vector2
 
+const PX_PER_M := 100
+
+## Kamil's vertical progress in meters.
+var progress_m: int = 0
+
+# Core game entities
 @onready var camera: Camera2D = $Camera2D
 @onready var player: CharacterBody2D = $Player
-@onready var max_height_label: Label = $Overlays/GameplayOverlay/MaxHeightLabel
-@onready var game_over_score_label: Label = $Overlays/GameOverOverlay/ScoreLabel
-@onready var music: AudioStreamPlayer = $MainMusic
-@onready var game_over_music: AudioStreamPlayer = $GameOverMusic
 
-@onready var title_screen_overlay: CanvasLayer = $Overlays/TitleScreenOverlay
-@onready var gameplay_overlay: CanvasLayer = $Overlays/GameplayOverlay
-@onready var paused_overlay: CanvasLayer = $Overlays/PausedOverlay
-@onready var game_over_overlay: CanvasLayer = $Overlays/GameOverOverlay
-
-@onready var platforms: Node2D = $Platforms
-
+# State-related members
 @onready var state_machine: C3StateMachine = $StateMachine
 @onready var title_screen_state: TitleScreenState = $StateMachine/TitleScreenState
 @onready var gameplay_state: GameplayState = $StateMachine/GameplayState
 @onready var game_over_state: GameOverState = $StateMachine/GameOverState
 @onready var pause_state: PausedState = $StateMachine/PausedState
 
-@onready var quit_button: Button = $Overlays/PausedOverlay/QuitButton
+# Subsystem managers
+@onready var overlay_manager: OverlayManager = $OverlayManager
+@onready var platform_manager: PlatformManager = $PlatformManager
+
+# Private subsystems
+@onready var _music: AudioStreamPlayer = $MainMusic
+@onready var _game_over_music: AudioStreamPlayer = $GameOverMusic
 
 
 func _ready() -> void:
+    platform_manager.game = self
     state_machine.init(self)
     camera.offset.y = camera_offset
     camera.position.y = player.position.y
     _player_position_start = player.position
-
-    # Don't show the quit button on the web build version.
-    quit_button.visible = not OS.has_feature("web")
 
 
 func _input(event: InputEvent) -> void:
@@ -48,20 +48,46 @@ func _input(event: InputEvent) -> void:
             get_tree().reload_current_scene()
 
 
+func _process(_delta: float) -> void:
+    progress_m = floori(y_coord_to_progress(camera.position.y) / PX_PER_M)
+    overlay_manager.set_progress_labels(progress_m)
+
+
 ## Resets the player and camera to starting positions.
 func reset_game() -> void:
     player.position = _player_position_start
     player.velocity = Vector2.ZERO
     camera.position.y = _player_position_start.y
-
-
-## Remove all spawned platforms.
-func clear_platforms() -> void:
-    for child in platforms.get_children():
-        child.queue_free()
+    platform_manager.clear()
 
 
 ## Given a world-space Y coordinate, returns the player's progress
 ## in pixels relative to the starting position.
 func y_coord_to_progress(y: float) -> float:
     return _player_position_start.y - y
+
+
+## Returns how far below the camera the player currently is, in pixels.[br]
+## A positive value means the player has fallen beneath the camera's view.
+func get_fall_distance() -> float:
+    return -(camera.position.y - player.position.y)
+
+
+## Starts the main gameplay music track.
+func play_music() -> void:
+    _music.play()
+
+
+## Stops the main gameplay music track.
+func stop_music() -> void:
+    _music.stop()
+
+
+## Starts the game over music track.
+func play_game_over_music() -> void:
+    _game_over_music.play()
+
+
+## Stops the game over music track.
+func stop_game_over_music() -> void:
+    _game_over_music.stop()
